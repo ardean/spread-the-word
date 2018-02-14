@@ -25,7 +25,7 @@
   "scripts": {
     "start": "ts-node ./demo",
     "build": "tsc",
-    "build-docs": "typedoc --out ./docs ./src --hideGenerator",
+    "build-docs": "typedoc --out ./docs ./src --hideGenerator && touch ./docs/.nojekyll",
     "prepublish": "yarn build && yarn build-docs",
     "test": "mocha -r ts-node/register test/*.spec.ts",
     "tslint": "tslint -p tsconfig.json"
