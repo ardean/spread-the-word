@@ -11,5 +11,5 @@ export default class SpreadTheWord extends EventEmitter {
     status: string;
     init(options?: ServerOptions): void;
     spread(options: any): Promise<Service>;
-    listen(options?: any): Promise<void>;
+    listen(options?: any): Promise<Listener>;
 }

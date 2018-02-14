@@ -48,6 +48,7 @@ class SpreadTheWord extends events_1.EventEmitter {
                 this.emit("down", service);
             });
             yield this.listener.listen();
+            return this.listener;
         });
     }
 }

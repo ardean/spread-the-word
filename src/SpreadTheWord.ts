@@ -40,5 +40,7 @@ export default class SpreadTheWord extends EventEmitter {
         this.emit("down", service);
       });
     await this.listener.listen();
+
+    return this.listener;
   }
 }
