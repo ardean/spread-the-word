@@ -45,7 +45,7 @@ stw.spread({
 
 ## Documentation
 
-You can find the latest version of documentation hosted [here](https://ardean.github.io/spread-the-word/).
+You can find the latest version of documentation hosted [here](https://ardean.github.io/spread-the-word/index.html).
 
 ## License
 
