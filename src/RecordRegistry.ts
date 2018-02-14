@@ -2,6 +2,7 @@ import * as MDNSUtils from "./MDNSUtils";
 import Record from "./Records/Record";
 import SRV from "./Records/SRV";
 import TXT from "./Records/TXT";
+import AddressRecord from "./Records/AddressRecord";
 
 export default class RecordRegistry {
   records: Record[] = [];
@@ -78,6 +79,10 @@ export default class RecordRegistry {
     }
 
     return srvRecords;
+  }
+
+  findAddressRecordsByFQDN(fqdn: string): AddressRecord[] {
+    return this.find(x => (x.type === "A" || x.type === "AAAA") && x.name === fqdn);
   }
 
   find(filter?: (record: Record, index: number) => any) {

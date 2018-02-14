@@ -132,4 +132,19 @@ describe("RecordRegistry", () => {
       assert.equal(records[1].data.port, port2);
     });
   });
+
+  describe("recordRegistry.findAddressesByFQDN(fqdn)", () => {
+    it("returns A and AAAA records for given fqdn", () => {
+      const records = recordRegistry.findAddressRecordsByFQDN(fqdn);
+      assert.lengthOf(records, 2);
+
+      assert.instanceOf(records[0], AAAA);
+      assert.equal(records[0].name, fqdn);
+      assert.equal(records[0].data, ipv6);
+
+      assert.instanceOf(records[1], A);
+      assert.equal(records[1].name, fqdn);
+      assert.equal(records[1].data, ipv4);
+    });
+  });
 });

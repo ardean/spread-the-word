@@ -8,6 +8,7 @@ import Service from "./Service";
 import Server from "./Server";
 import Query from "./Query";
 import Question from "./Question";
+import AddressRecord from "./Records/AddressRecord";
 
 const debugLog = debug("SpreadTheWord:Listener");
 
@@ -61,7 +62,10 @@ export default class Listener extends EventEmitter {
     for (const srvRecord of srvRecords) {
       const name = MDNSUtils.parseDNSName(srvRecord.name).name;
       const remoteService = this.remoteServices.find(x => x.name === name);
-      if (!remoteService) this.addRemoteService(srvRecord);
+      if (!remoteService) {
+        const addressRecords = this.server.recordRegistry.findAddressRecordsByFQDN(srvRecord.data.target);
+        this.addRemoteService(srvRecord, addressRecords);
+      }
     }
 
     for (const remoteService of this.remoteServices) {
@@ -76,8 +80,8 @@ export default class Listener extends EventEmitter {
     this.server.removeListener("response", this.onResponse);
   }
 
-  addRemoteService(record: SRV) {
-    const remoteService = new RemoteService(record);
+  addRemoteService(record: SRV, addressRecords: AddressRecord[]) {
+    const remoteService = new RemoteService(record, addressRecords);
     this.remoteServices.push(remoteService);
 
     debugLog("up", remoteService.name, remoteService.hostname, remoteService.port);

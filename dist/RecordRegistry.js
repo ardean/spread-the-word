@@ -64,6 +64,9 @@ class RecordRegistry {
         }
         return srvRecords;
     }
+    findAddressRecordsByFQDN(fqdn) {
+        return this.find(x => (x.type === "A" || x.type === "AAAA") && x.name === fqdn);
+    }
     find(filter) {
         this.keepHouse();
         return filter ?

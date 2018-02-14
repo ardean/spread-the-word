@@ -50,8 +50,10 @@ class Listener extends events_1.EventEmitter {
         for (const srvRecord of srvRecords) {
             const name = MDNSUtils.parseDNSName(srvRecord.name).name;
             const remoteService = this.remoteServices.find(x => x.name === name);
-            if (!remoteService)
-                this.addRemoteService(srvRecord);
+            if (!remoteService) {
+                const addressRecords = this.server.recordRegistry.findAddressRecordsByFQDN(srvRecord.data.target);
+                this.addRemoteService(srvRecord, addressRecords);
+            }
         }
         for (const remoteService of this.remoteServices) {
             const srvRecord = srvRecords.find(x => {
@@ -64,8 +66,8 @@ class Listener extends events_1.EventEmitter {
     destroy() {
         this.server.removeListener("response", this.onResponse);
     }
-    addRemoteService(record) {
-        const remoteService = new RemoteService_1.default(record);
+    addRemoteService(record, addressRecords) {
+        const remoteService = new RemoteService_1.default(record, addressRecords);
         this.remoteServices.push(remoteService);
         debugLog("up", remoteService.name, remoteService.hostname, remoteService.port);
         this.emit("up", remoteService);

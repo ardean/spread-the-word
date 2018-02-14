@@ -1,7 +1,9 @@
 import SRV from "./Records/SRV";
+import AddressRecord from "./Records/AddressRecord";
 export default class RemoteService {
     name: string;
     hostname: string;
     port: number;
-    constructor(record: SRV);
+    addresses: string[];
+    constructor(record: SRV, addressRecords?: AddressRecord[]);
 }

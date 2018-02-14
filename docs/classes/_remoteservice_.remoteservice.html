@@ -90,6 +90,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_remoteservice_.remoteservice.html#addresses" class="tsd-kind-icon">addresses</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_remoteservice_.remoteservice.html#hostname" class="tsd-kind-icon">hostname</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_remoteservice_.remoteservice.html#name" class="tsd-kind-icon">name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_remoteservice_.remoteservice.html#port" class="tsd-kind-icon">port</a></li>
@@ -104,19 +105,22 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Remote<wbr>Service<span class="tsd-signature-symbol">(</span>record<span class="tsd-signature-symbol">: </span><a href="_records_srv_.srv.html" class="tsd-signature-type">SRV</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_remoteservice_.remoteservice.html" class="tsd-signature-type">RemoteService</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Remote<wbr>Service<span class="tsd-signature-symbol">(</span>record<span class="tsd-signature-symbol">: </span><a href="_records_srv_.srv.html" class="tsd-signature-type">SRV</a>, addressRecords<span class="tsd-signature-symbol">?: </span><a href="../modules/_records_addressrecord_.html#addressrecord" class="tsd-signature-type">AddressRecord</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_remoteservice_.remoteservice.html" class="tsd-signature-type">RemoteService</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/26bd4bb/src/RemoteService.ts#L7">RemoteService.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/df9fa8b/src/RemoteService.ts#L9">RemoteService.ts:9</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>record: <a href="_records_srv_.srv.html" class="tsd-signature-type">SRV</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> addressRecords: <a href="../modules/_records_addressrecord_.html#addressrecord" class="tsd-signature-type">AddressRecord</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_remoteservice_.remoteservice.html" class="tsd-signature-type">RemoteService</a></h4>
@@ -127,12 +131,22 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="addresses" class="tsd-anchor"></a>
+					<h3>addresses</h3>
+					<div class="tsd-signature tsd-kind-icon">addresses<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/df9fa8b/src/RemoteService.ts#L9">RemoteService.ts:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="hostname" class="tsd-anchor"></a>
 					<h3>hostname</h3>
 					<div class="tsd-signature tsd-kind-icon">hostname<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/26bd4bb/src/RemoteService.ts#L6">RemoteService.ts:6</a></li>
+							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/df9fa8b/src/RemoteService.ts#L7">RemoteService.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -142,7 +156,7 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/26bd4bb/src/RemoteService.ts#L5">RemoteService.ts:5</a></li>
+							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/df9fa8b/src/RemoteService.ts#L6">RemoteService.ts:6</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -152,7 +166,7 @@
 					<div class="tsd-signature tsd-kind-icon">port<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/26bd4bb/src/RemoteService.ts#L7">RemoteService.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/df9fa8b/src/RemoteService.ts#L8">RemoteService.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -193,6 +207,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_records_aaaa_.html">"<wbr>Records/AAAA"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_records_addressrecord_.html">"<wbr>Records/<wbr>Address<wbr>Record"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_records_ptr_.html">"<wbr>Records/PTR"</a>
@@ -241,6 +258,9 @@
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="_remoteservice_.remoteservice.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_remoteservice_.remoteservice.html#addresses" class="tsd-kind-icon">addresses</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_remoteservice_.remoteservice.html#hostname" class="tsd-kind-icon">hostname</a>

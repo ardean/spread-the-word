@@ -3,6 +3,7 @@ import RemoteService from "./RemoteService";
 import { EventEmitter } from "events";
 import SRV from "./Records/SRV";
 import Server from "./Server";
+import AddressRecord from "./Records/AddressRecord";
 export interface ListenerOptions {
     name?: string;
     type?: string;
@@ -18,6 +19,6 @@ export default class Listener extends EventEmitter {
     listen(): Promise<void>;
     onResponse(): void;
     destroy(): void;
-    addRemoteService(record: SRV): void;
+    addRemoteService(record: SRV, addressRecords: AddressRecord[]): void;
     removeRemoteService(name: string): void;
 }
