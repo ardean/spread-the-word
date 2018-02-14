@@ -85,7 +85,7 @@ class ProductionServer extends events_1.EventEmitter {
                         return;
                     const matchedRecords = [];
                     for (const record of res.answers) {
-                        const question = query.questions.find(x => record.name === name &&
+                        const question = query.questions.find(x => record.name === x.name &&
                             (x.type === "ANY" || record.type === x.type));
                         if (question) {
                             matchedRecords.push(record);

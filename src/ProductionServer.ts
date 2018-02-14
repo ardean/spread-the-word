@@ -92,7 +92,7 @@ export default class ProductionServer extends EventEmitter implements Server {
         for (const record of res.answers) {
 
           const question = query.questions.find(x =>
-            record.name === name &&
+            record.name === x.name &&
             (x.type === "ANY" || record.type === x.type)
           );
           if (question) {
