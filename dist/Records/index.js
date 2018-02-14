@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Record_1 = require("./Record");
+exports.Record = Record_1.default;
+exports.default = Record_1.default;
+var A_1 = require("./A");
+exports.A = A_1.default;
+var AAAA_1 = require("./AAAA");
+exports.AAAA = AAAA_1.default;
+var SRV_1 = require("./SRV");
+exports.SRV = SRV_1.default;
+var PTR_1 = require("./PTR");
+exports.PTR = PTR_1.default;
+var TXT_1 = require("./TXT");
+exports.TXT = TXT_1.default;
