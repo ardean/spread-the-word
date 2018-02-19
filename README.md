@@ -37,7 +37,7 @@ stw.spread({
   name: "awesome remote receiver",
   port: 4444,
   txt: {
-    myProp: "Custom Data"
+    message: "Custom Data"
   }
 });
 ```
