@@ -66,8 +66,12 @@ export default class RecordRegistry {
     return otherRecords;
   }
 
-  findSRVByName(name: string): SRV {
+  findOneSRVByName(name: string): SRV {
     return this.tracePTR(name).find(x => x.type === "SRV");
+  }
+
+  findOneTXTByName(name: string): TXT {
+    return this.tracePTR(name).find(x => x.type === "TXT");
   }
 
   findSRVsByType(type: string): SRV[] {
@@ -81,10 +85,11 @@ export default class RecordRegistry {
     return srvRecords;
   }
 
-  findAddressRecordsByFQDN(fqdn: string): AddressRecord[] {
-    return this.find(x => (x.type === "A" || x.type === "AAAA") && x.name === fqdn);
+  findAddressRecordsByHostname(hostname: string): AddressRecord[] {
+    return this.find(x => (x.type === "A" || x.type === "AAAA") && x.name === hostname);
   }
 
+  // tslint:disable-next-line:no-any
   find(filter?: (record: Record, index: number) => any) {
     this.keepHouse();
 
@@ -93,6 +98,7 @@ export default class RecordRegistry {
       this.records.concat();
   }
 
+  // tslint:disable-next-line:no-any
   findOne(filter: (record: Record, index: number) => any) {
     return this.find().find(filter);
   }

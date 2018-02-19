@@ -1,5 +1,6 @@
 import Record from "./Records/Record";
 import SRV from "./Records/SRV";
+import TXT from "./Records/TXT";
 import AddressRecord from "./Records/AddressRecord";
 export default class RecordRegistry {
     records: Record[];
@@ -8,9 +9,10 @@ export default class RecordRegistry {
     remove(record: Record): Record;
     removeAll(records?: Record[]): Record[];
     tracePTR(name: string): Record[];
-    findSRVByName(name: string): SRV;
+    findOneSRVByName(name: string): SRV;
+    findOneTXTByName(name: string): TXT;
     findSRVsByType(type: string): SRV[];
-    findAddressRecordsByFQDN(fqdn: string): AddressRecord[];
+    findAddressRecordsByHostname(hostname: string): AddressRecord[];
     find(filter?: (record: Record, index: number) => any): Record[];
     findOne(filter: (record: Record, index: number) => any): Record;
     keepHouse(): void;

@@ -1,24 +1,31 @@
 import { assert } from "chai";
-import DebugServer from "../src/DebugServer";
+import Server from "../src/Server";
 import Listener from "../src/Listener";
 import Service from "../src/Service";
 import * as MDNSUtils from "../src/MDNSUtils";
-import { TOP_LEVEL_DOMAIN, WILDCARD } from "../src/Constants";
 import Response from "../src/Response";
+import Transport from "../src/Transports/Transport";
+import LocalTransport from "../src/Transports/LocalTransport";
+import { TOP_LEVEL_DOMAIN, WILDCARD } from "../src/Constants";
 
 const type = "jsremote";
-const name = "my test remote receiver";
+const name = "remote receiver";
 const port = 4444;
 const dnsType = MDNSUtils.stringifyDNSName({ type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
 const dnsName = MDNSUtils.stringifyDNSName({ name, type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
 
 describe("Service", () => {
-  let server: DebugServer;
+  let transport: Transport;
+  let server: Server;
   let service: Service;
 
-  describe("service.spread({ type, name })", () => {
+  describe("new Service(server, { type, name, port }).spread()", () => {
     beforeEach(async () => {
-      server = new DebugServer({}, { referrerOptions: { address: "192.168.1.51" } });
+      transport = new LocalTransport({
+        referrerOptions: { address: "192.168.1.51" },
+        addresses: [{ family: "IPv4", address: "192.168.1.55" }]
+      });
+      server = new Server({ transport });
       service = new Service(server, { type, name, port });
     });
 
@@ -64,17 +71,19 @@ describe("Service", () => {
             if (record.type === "TXT" && record.name === dnsName) txtFound = true;
           }
 
-          server.removeListener("response", onResponse);
-          resolve();
+          if (wildcardFound && dnsTypeFound && serviceFound && txtFound) {
+            server.removeListener("response", onResponse);
+            resolve();
+          }
         });
       });
       await service.spread();
       await responseDetector;
 
-      assert.isTrue(wildcardFound);
-      assert.isTrue(dnsTypeFound);
-      assert.isTrue(serviceFound);
-      assert.isTrue(txtFound);
+      assert.isTrue(wildcardFound, "wildcard found");
+      assert.isTrue(dnsTypeFound, "dns type found");
+      assert.isTrue(serviceFound, "service found");
+      assert.isTrue(txtFound, "txt found");
     });
 
     describe("when service already exists", () => {

@@ -83,20 +83,31 @@
 				<pre><code class="lang-js"><span class="hljs-keyword">import</span> stw <span class="hljs-keyword">from</span> <span class="hljs-string">"spread-the-word"</span>;
 
 stw
-  .on(<span class="hljs-string">"up"</span>, remoteService =&gt; <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${remoteService.name}</span> is up!`</span>))
-  .on(<span class="hljs-string">"down"</span>, remoteService =&gt; <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${remoteService.name}</span> is down!`</span>));
+  .on(<span class="hljs-string">"up"</span>, (remoteService, res, referrer) =&gt; {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${remoteService.name}</span> is up! (from <span class="hljs-subst">${referrer.address}</span>)`</span>);
+  })
+  .on(<span class="hljs-string">"down"</span>, (remoteService, res, referrer) =&gt; {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${remoteService.name}</span> is down! (from <span class="hljs-subst">${referrer.address}</span>)`</span>);
+  });
 
 stw.listen({ <span class="hljs-attr">type</span>: <span class="hljs-string">"jsremote"</span> });
 
 stw.spread({
   <span class="hljs-attr">type</span>: <span class="hljs-string">"jsremote"</span>,
   <span class="hljs-attr">name</span>: <span class="hljs-string">"awesome remote receiver"</span>,
-  <span class="hljs-attr">port</span>: <span class="hljs-number">4444</span>
+  <span class="hljs-attr">port</span>: <span class="hljs-number">4444</span>,
+  <span class="hljs-attr">txt</span>: {
+    <span class="hljs-attr">myProp</span>: <span class="hljs-string">"Custom Data"</span>
+  }
 });
 </code></pre>
 				<h2 id="features">Features</h2>
 				<ul>
 					<li>Easy service detection &amp; advertisement on your local network</li>
+					<li><a href="https://tools.ietf.org/html/rfc6763#section-6">TXT</a> Record support<ul>
+							<li>used <a href="https://www.npmjs.com/package/dns-txt">Encoder / Decoder</a></li>
+						</ul>
+					</li>
 					<li><a href="https://tools.ietf.org/html/rfc6763#section-7.1">subtypes</a> support </li>
 					<li>auto <a href="https://tools.ietf.org/html/rfc6762#section-8.1">probing</a> on spread</li>
 					<li>No extra native dependencies</li>
@@ -118,16 +129,10 @@ stw.spread({
 						<a href="modules/_constants_.html">"<wbr>Constants"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_debugserver_.html">"<wbr>Debug<wbr>Server"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="modules/_listener_.html">"<wbr>Listener"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_mdnsutils_.html">"MDNSUtils"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_productionserver_.html">"<wbr>Production<wbr>Server"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_query_.html">"<wbr>Query"</a>
@@ -179,6 +184,18 @@ stw.spread({
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_spreadtheword_.html">"<wbr>Spread<wbr>The<wbr>Word"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_transports_localtransport_.html">"<wbr>Transports/<wbr>Local<wbr>Transport"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_transports_mdnstransport_.html">"<wbr>Transports/MDNSTransport"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_transports_transport_.html">"<wbr>Transports/<wbr>Transport"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_transports_index_.html">"<wbr>Transports/index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_index_.html">"index"</a>

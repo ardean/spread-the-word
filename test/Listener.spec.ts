@@ -1,24 +1,29 @@
 import { assert } from "chai";
-import DebugServer from "../src/DebugServer";
+import Server from "../src/Server";
 import Service from "../src/Service";
 import Listener from "../src/Listener";
+import Transport from "../src/Transports/Transport";
+import LocalTransport from "../src/Transports/LocalTransport";
 
 const type = "jsremote";
-const name = "my test remote receiver";
+const name = "remote receiver";
 const port = 4444;
 
 describe("Listener", () => {
-  let server: DebugServer;
+  let transport: Transport;
+  let server: Server;
   let service: Service;
   let listener: Listener;
 
   describe("new Listener({ type }).listen()", () => {
     beforeEach(async () => {
-      server = new DebugServer({}, { referrerOptions: { address: "192.168.1.51" } });
+      transport = new LocalTransport({
+        referrerOptions: { address: "192.168.1.51" },
+        addresses: [{ family: "IPv4", address: "192.168.1.55" }]
+      });
+      server = new Server({ transport });
       service = new Service(server, { type, name, port });
       listener = new Listener(server, { type });
-
-      await listener.listen();
     });
 
     afterEach(async () => {
@@ -30,11 +35,13 @@ describe("Listener", () => {
     it("emits up event for matching service type", async () => {
       const upDetector = new Promise(resolve => {
         listener.on("up", function onUp(remoteService) {
-          if (remoteService.name !== name) return;
-          listener.removeListener("up", onUp);
-          setTimeout(() => resolve(), 200);
+          if (remoteService.name === name) {
+            listener.removeListener("up", onUp);
+            resolve();
+          }
         });
       });
+      await listener.listen();
       await service.spread();
       await upDetector;
     });
@@ -42,11 +49,13 @@ describe("Listener", () => {
     it("emits down event for matching service type", async () => {
       const downDetector = new Promise(resolve => {
         listener.on("down", function onDown(remoteService) {
-          if (remoteService.name !== name) return;
-          listener.removeListener("down", onDown);
-          setTimeout(() => resolve(), 200);
+          if (remoteService.name === name) {
+            listener.removeListener("down", onDown);
+            resolve();
+          }
         });
       });
+      await listener.listen();
       await service.spread();
       await service.destroy();
       await downDetector;
@@ -68,6 +77,8 @@ describe("Listener", () => {
           setTimeout(() => resolve(), 200);
         });
       });
+
+      await listener.listen();
 
       await service.spread();
       await upDetector;

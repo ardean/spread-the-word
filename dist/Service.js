@@ -23,6 +23,7 @@ class Service extends events_1.EventEmitter {
         this.subtypes = [];
         this.spreaded = false;
         this.destroyed = false;
+        debugLog("new");
         this.server = server;
         this.name = options.name;
         this.type = options.type;
@@ -54,20 +55,21 @@ class Service extends events_1.EventEmitter {
                             type: "ANY"
                         }]
                 });
-                const res = yield this.server.queryAndListen(query);
-                if (res && res.answers.length > 0) {
+                const queryRes = yield this.server.queryAndListen(query);
+                if (queryRes && queryRes.answers.length > 0) {
                     throw new Error("service_exists");
                 }
             }
-            const answers = [
-                new Records_1.PTR({ name: Constants_1.WILDCARD, data: this.dnsType }),
-            ].concat(this.getServiceRecords());
+            const answers = this.getServiceRecords();
             const additionals = this.getAddressRecords();
-            yield this.broadcast(new Response_1.default({ answers, additionals }), 1000);
+            const res = Response_1.default.parse(Response_1.default.serialize({ answers, additionals }, this.server.transportOptions), this.server.transportOptions);
+            yield this.broadcast(res, 1000);
+            this.server.addService(this);
         });
     }
     getServiceRecords() {
         return [
+            new Records_1.PTR({ name: Constants_1.WILDCARD, data: this.dnsType }),
             new Records_1.PTR({ name: this.dnsType, data: this.dnsName }),
             new Records_1.SRV({ name: this.dnsName, data: { target: this.hostname, port: this.port } }),
             new Records_1.TXT({ name: this.dnsName, data: this.txt })
@@ -75,7 +77,7 @@ class Service extends events_1.EventEmitter {
     }
     getAddressRecords() {
         const records = [];
-        for (const { address, family } of MDNSUtils.getExternalAddresses()) {
+        for (const { address, family } of this.server.transport.getAddresses()) {
             if (family === "IPv4") {
                 records.push(new Records_1.A({ name: this.hostname, data: address }));
             }
@@ -90,7 +92,11 @@ class Service extends events_1.EventEmitter {
             if (this.destroyed)
                 return;
             debugLog("broadcast");
-            yield this.server.respond(res);
+            yield this.server.transport.respond(res);
+            const records = res.answers.concat(res.additionals);
+            for (const record of records) {
+                this.server.recordRegistry.add(record);
+            }
             this.spreaded = true;
             delay = Math.min(delay * Constants_1.REANNOUNCE_FACTOR, Constants_1.REANNOUNCE_MAX_MS);
             setTimeout(() => __awaiter(this, void 0, void 0, function* () { return yield this.broadcast(res, delay); }), delay);
@@ -106,11 +112,16 @@ class Service extends events_1.EventEmitter {
     sendGoodbye() {
         return __awaiter(this, void 0, void 0, function* () {
             debugLog("goodbye");
-            const records = this.getServiceRecords().concat(this.getAddressRecords());
+            const records = [new Records_1.PTR({ name: this.dnsType, data: this.dnsName })];
             for (const record of records) {
                 record.ttl = 0;
             }
-            yield this.server.respond(new Response_1.default({ answers: records }));
+            const res = new Response_1.default({ answers: records });
+            yield this.server.transport.respond(res);
+            for (const record of records) {
+                this.server.recordRegistry.remove(record);
+            }
+            debugLog("goodbye sent");
         });
     }
     destroy() {

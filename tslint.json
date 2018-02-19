@@ -21,7 +21,11 @@
     "max-classes-per-file": false,
     "no-console": {
       "severity": "warn"
-    }
+    },
+    "no-any": {
+      "severity": "warn"
+    },
+    "no-unused-expression": false
   },
   "rulesDirectory": []
 }

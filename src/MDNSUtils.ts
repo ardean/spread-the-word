@@ -1,4 +1,5 @@
 import * as os from "os";
+import * as dnsTxt from "dns-txt";
 import Record from "./Records/Record";
 import PTR from "./Records/PTR";
 import TXT from "./Records/TXT";
@@ -72,7 +73,7 @@ export function getExternalAddresses() {
   const interfaceMap = os.networkInterfaces();
   const interfaceNames = Object.keys(interfaceMap);
 
-  const addresses = [];
+  const addresses: Array<{ family: string, address: string }> = [];
   for (const interfaceName of interfaceNames) {
     const interfaces = interfaceMap[interfaceName];
     for (const { internal, family, address } of interfaces) {
@@ -87,12 +88,35 @@ export function getExternalAddresses() {
   return addresses;
 }
 
-export function parseRecord(record) {
+export function parseRecord(record, options: { binaryTXT?: boolean } = {}) {
   if (record.type === "PTR") return new PTR(record);
-  if (record.type === "TXT") return new TXT(record);
+  if (record.type === "TXT") return TXT.parse(record, { binary: options.binaryTXT });
   if (record.type === "SRV") return new SRV(record);
   if (record.type === "AAAA") return new AAAA(record);
   if (record.type === "A") return new A(record);
 
   return null;
+}
+
+export function serializeRecord(record, options: { binaryTXT?: boolean } = {}) {
+  if (record.type === "PTR") return new PTR(record);
+  if (record.type === "TXT") return TXT.serialize(record, { binary: options.binaryTXT });
+  if (record.type === "SRV") return new SRV(record);
+  if (record.type === "AAAA") return new AAAA(record);
+  if (record.type === "A") return new A(record);
+
+  return null;
+}
+
+export interface TXTData {
+  [key: string]: string | Buffer;
+}
+
+export function parseTXTData(data: Buffer, options: { binary?: boolean } = { binary: false }) {
+  const result = dnsTxt({ binary: options.binary }).decode(data) as TXTData;
+  return Object.keys(result).length > 0 ? result : null;
+}
+
+export function serializeTXTData(data: TXTData, options: { binary?: boolean } = { binary: false }) {
+  return dnsTxt({ binary: options.binary }).encode(data) as Buffer;
 }

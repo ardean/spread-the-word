@@ -1,15 +1,14 @@
 /// <reference types="node" />
 import { EventEmitter } from "events";
-import Listener from "./Listener";
-import Server from "./ProductionServer";
-import Service from "./Service";
-import { ServerOptions } from "./Server";
+import Listener, { ListenerOptions } from "./Listener";
+import Server, { ServerOptions } from "./Server";
+import Service, { ServiceOptions } from "./Service";
 export default class SpreadTheWord extends EventEmitter {
     server: Server;
     services: Service[];
-    listener: Listener;
     status: string;
     init(options?: ServerOptions): void;
-    spread(options: any): Promise<Service>;
-    listen(options?: any): Promise<Listener>;
+    spread(options: ServiceOptions, serverOptions?: ServerOptions): Promise<Service>;
+    listen(options?: ListenerOptions, serverOptions?: ServerOptions): Promise<Listener>;
+    destroy(): Promise<void>;
 }

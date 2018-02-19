@@ -10,23 +10,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const events_1 = require("events");
 const Listener_1 = require("./Listener");
-const ProductionServer_1 = require("./ProductionServer");
+const Server_1 = require("./Server");
 const Service_1 = require("./Service");
 class SpreadTheWord extends events_1.EventEmitter {
     constructor() {
         super(...arguments);
         this.services = [];
-        this.status = "Stopped";
+        this.status = "Uninitialized";
     }
     init(options) {
-        if (this.status !== "Stopped")
+        if (this.status !== "Uninitialized")
             return;
-        this.status = "Started";
-        this.server = new ProductionServer_1.default(options);
+        this.status = "Spreaded";
+        this.server = new Server_1.default(options);
     }
-    spread(options) {
+    spread(options, serverOptions) {
         return __awaiter(this, void 0, void 0, function* () {
-            this.init();
+            if (this.status === "Destroyed")
+                return;
+            this.init(serverOptions);
             const service = new Service_1.default(this.server, options);
             service.once("destroy", () => {
                 this.services.splice(this.services.indexOf(service), 1);
@@ -36,19 +38,30 @@ class SpreadTheWord extends events_1.EventEmitter {
             return service;
         });
     }
-    listen(options) {
+    listen(options, serverOptions) {
         return __awaiter(this, void 0, void 0, function* () {
-            this.init();
-            this.listener = new Listener_1.default(this.server, options);
-            this.listener
-                .on("up", service => {
-                this.emit("up", service);
-            })
-                .on("down", service => {
-                this.emit("down", service);
-            });
-            yield this.listener.listen();
-            return this.listener;
+            if (this.status === "Destroyed")
+                return;
+            this.init(serverOptions);
+            const listener = new Listener_1.default(this.server, options);
+            listener
+                .on("up", (remoteService, res, referrer) => this.emit("up", remoteService, res, referrer))
+                .on("down", (remoteService, res, referrer) => this.emit("down", remoteService, res, referrer));
+            yield listener.listen();
+            return listener;
+        });
+    }
+    destroy() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.status !== "Destroyed")
+                return;
+            this.status = "Destroyed";
+            for (const service of this.services) {
+                yield service.destroy();
+            }
+            if (this.server)
+                yield this.server.destroy();
+            this.emit("destroy");
         });
     }
 }

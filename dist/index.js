@@ -1,13 +1,7 @@
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./Records"));
-var ProductionServer_1 = require("./ProductionServer");
-exports.ProductionServer = ProductionServer_1.default;
-var DebugServer_1 = require("./DebugServer");
-exports.DebugServer = DebugServer_1.default;
+var Server_1 = require("./Server");
+exports.Server = Server_1.default;
 var Query_1 = require("./Query");
 exports.Query = Query_1.default;
 var Question_1 = require("./Question");
@@ -24,6 +18,10 @@ var Listener_1 = require("./Listener");
 exports.Listener = Listener_1.default;
 var SpreadTheWord_1 = require("./SpreadTheWord");
 exports.SpreadTheWord = SpreadTheWord_1.default;
+const Records = require("./Records");
+exports.Records = Records;
+const Transports = require("./Transports");
+exports.Transports = Transports;
 const MDNSUtils = require("./MDNSUtils");
 exports.MDNSUtils = MDNSUtils;
 const SpreadTheWord_2 = require("./SpreadTheWord");

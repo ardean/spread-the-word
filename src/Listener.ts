@@ -9,6 +9,9 @@ import Server from "./Server";
 import Query from "./Query";
 import Question from "./Question";
 import AddressRecord from "./Records/AddressRecord";
+import Response from "./Response";
+import Referrer from "./Referrer";
+import TXT from "./Records/TXT";
 
 const debugLog = debug("SpreadTheWord:Listener");
 
@@ -47,6 +50,8 @@ export default class Listener extends EventEmitter {
 
   async listen() {
     this.server.on("response", this.onResponse);
+    this.server.on("ownResponse", this.onResponse);
+
     const query = new Query({
       questions: [{
         name: this.typeName || WILDCARD,
@@ -54,17 +59,18 @@ export default class Listener extends EventEmitter {
       }]
     });
 
-    await this.server.query(query);
+    await this.server.transport.query(query);
   }
 
-  onResponse() {
+  onResponse(res: Response, referrer: Referrer) {
     const srvRecords = this.server.recordRegistry.findSRVsByType(this.typeName || WILDCARD);
     for (const srvRecord of srvRecords) {
       const name = MDNSUtils.parseDNSName(srvRecord.name).name;
       const remoteService = this.remoteServices.find(x => x.name === name);
       if (!remoteService) {
-        const addressRecords = this.server.recordRegistry.findAddressRecordsByFQDN(srvRecord.data.target);
-        this.addRemoteService(srvRecord, addressRecords);
+        const addressRecords = this.server.recordRegistry.findAddressRecordsByHostname(srvRecord.data.target);
+        const txtRecord = this.server.recordRegistry.findOneTXTByName(srvRecord.name);
+        this.addRemoteService(srvRecord, txtRecord, addressRecords, res, referrer);
       }
     }
 
@@ -72,29 +78,30 @@ export default class Listener extends EventEmitter {
       const srvRecord = srvRecords.find(x => {
         return MDNSUtils.parseDNSName(x.name).name === remoteService.name;
       });
-      if (!srvRecord) this.removeRemoteService(remoteService.name);
+      if (!srvRecord) this.removeRemoteService(remoteService.name, res, referrer);
     }
   }
 
   destroy() {
     this.server.removeListener("response", this.onResponse);
+    this.server.removeListener("ownResponse", this.onResponse);
   }
 
-  addRemoteService(record: SRV, addressRecords: AddressRecord[]) {
-    const remoteService = new RemoteService(record, addressRecords);
+  addRemoteService(record: SRV, txtRecord: TXT, addressRecords: AddressRecord[], res: Response, referrer: Referrer) {
+    const remoteService = new RemoteService(record, txtRecord, addressRecords);
     this.remoteServices.push(remoteService);
 
     debugLog("up", remoteService.name, remoteService.hostname, remoteService.port);
-    this.emit("up", remoteService);
+    this.emit("up", remoteService, res, referrer);
   }
 
-  removeRemoteService(name: string) {
+  removeRemoteService(name: string, res: Response, referrer: Referrer) {
     const remoteService = this.remoteServices.find(x => x.name === name);
     if (!remoteService) return;
 
     this.remoteServices.splice(this.remoteServices.indexOf(remoteService), 1);
 
     debugLog("down", remoteService.name, remoteService.hostname, remoteService.port);
-    this.emit("down", remoteService);
+    this.emit("down", remoteService, res, referrer);
   }
 }

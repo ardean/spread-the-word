@@ -89,7 +89,6 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_spreadtheword_.spreadtheword.html#listener" class="tsd-kind-icon">listener</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_spreadtheword_.spreadtheword.html#server" class="tsd-kind-icon">server</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_spreadtheword_.spreadtheword.html#services" class="tsd-kind-icon">services</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_spreadtheword_.spreadtheword.html#status" class="tsd-kind-icon">status</a></li>
@@ -100,6 +99,7 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_spreadtheword_.spreadtheword.html#addlistener" class="tsd-kind-icon">add<wbr>Listener</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_spreadtheword_.spreadtheword.html#destroy" class="tsd-kind-icon">destroy</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_spreadtheword_.spreadtheword.html#emit" class="tsd-kind-icon">emit</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_spreadtheword_.spreadtheword.html#eventnames" class="tsd-kind-icon">event<wbr>Names</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_spreadtheword_.spreadtheword.html#getmaxlisteners" class="tsd-kind-icon">get<wbr>Max<wbr>Listeners</a></li>
@@ -125,22 +125,12 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="listener" class="tsd-anchor"></a>
-					<h3>listener</h3>
-					<div class="tsd-signature tsd-kind-icon">listener<span class="tsd-signature-symbol">:</span> <a href="_listener_.listener.html" class="tsd-signature-type">Listener</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/df9fa8b/src/SpreadTheWord.ts#L10">SpreadTheWord.ts:10</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="server" class="tsd-anchor"></a>
 					<h3>server</h3>
-					<div class="tsd-signature tsd-kind-icon">server<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_server_.server.html" class="tsd-signature-type">Server</a></div>
+					<div class="tsd-signature tsd-kind-icon">server<span class="tsd-signature-symbol">:</span> <a href="_server_.server.html" class="tsd-signature-type">Server</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/df9fa8b/src/SpreadTheWord.ts#L8">SpreadTheWord.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/2544cdf/src/SpreadTheWord.ts#L10">SpreadTheWord.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -150,17 +140,17 @@
 					<div class="tsd-signature tsd-kind-icon">services<span class="tsd-signature-symbol">:</span> <a href="_service_.service.html" class="tsd-signature-type">Service</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/df9fa8b/src/SpreadTheWord.ts#L9">SpreadTheWord.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/2544cdf/src/SpreadTheWord.ts#L11">SpreadTheWord.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="status" class="tsd-anchor"></a>
 					<h3>status</h3>
-					<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Stopped&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">status<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Uninitialized&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/df9fa8b/src/SpreadTheWord.ts#L11">SpreadTheWord.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/2544cdf/src/SpreadTheWord.ts#L12">SpreadTheWord.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -221,6 +211,23 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="destroy" class="tsd-anchor"></a>
+					<h3>destroy</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">destroy<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/2544cdf/src/SpreadTheWord.ts#L56">SpreadTheWord.ts:56</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -300,7 +307,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/df9fa8b/src/SpreadTheWord.ts#L13">SpreadTheWord.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/2544cdf/src/SpreadTheWord.ts#L14">SpreadTheWord.ts:14</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -317,19 +324,22 @@
 					<a name="listen" class="tsd-anchor"></a>
 					<h3>listen</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">listen<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_listener_.listener.html" class="tsd-signature-type">Listener</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">listen<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_listener_.listeneroptions.html" class="tsd-signature-type">ListenerOptions</a>, serverOptions<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_server_.serveroptions.html" class="tsd-signature-type">ServerOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_listener_.listener.html" class="tsd-signature-type">Listener</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/df9fa8b/src/SpreadTheWord.ts#L32">SpreadTheWord.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/2544cdf/src/SpreadTheWord.ts#L37">SpreadTheWord.ts:37</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">any</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/_listener_.listeneroptions.html" class="tsd-signature-type">ListenerOptions</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> serverOptions: <a href="../interfaces/_server_.serveroptions.html" class="tsd-signature-type">ServerOptions</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_listener_.listener.html" class="tsd-signature-type">Listener</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -695,19 +705,22 @@
 					<a name="spread" class="tsd-anchor"></a>
 					<h3>spread</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">spread<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_service_.service.html" class="tsd-signature-type">Service</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">spread<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_service_.serviceoptions.html" class="tsd-signature-type">ServiceOptions</a>, serverOptions<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_server_.serveroptions.html" class="tsd-signature-type">ServerOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_service_.service.html" class="tsd-signature-type">Service</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/df9fa8b/src/SpreadTheWord.ts#L19">SpreadTheWord.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/2544cdf/src/SpreadTheWord.ts#L21">SpreadTheWord.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>options: <span class="tsd-signature-type">any</span></h5>
+									<h5>options: <a href="../interfaces/_service_.serviceoptions.html" class="tsd-signature-type">ServiceOptions</a></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> serverOptions: <a href="../interfaces/_server_.serveroptions.html" class="tsd-signature-type">ServerOptions</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_service_.service.html" class="tsd-signature-type">Service</a><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -753,16 +766,10 @@
 						<a href="../modules/_constants_.html">"<wbr>Constants"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_debugserver_.html">"<wbr>Debug<wbr>Server"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="../modules/_listener_.html">"<wbr>Listener"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_mdnsutils_.html">"MDNSUtils"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_productionserver_.html">"<wbr>Production<wbr>Server"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_query_.html">"<wbr>Query"</a>
@@ -816,6 +823,18 @@
 						<a href="../modules/_spreadtheword_.html">"<wbr>Spread<wbr>The<wbr>Word"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_transports_localtransport_.html">"<wbr>Transports/<wbr>Local<wbr>Transport"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_transports_mdnstransport_.html">"<wbr>Transports/MDNSTransport"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_transports_transport_.html">"<wbr>Transports/<wbr>Transport"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_transports_index_.html">"<wbr>Transports/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_index_.html">"index"</a>
 					</li>
 				</ul>
@@ -827,9 +846,6 @@
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
 						<a href="_spreadtheword_.spreadtheword.html" class="tsd-kind-icon">Spread<wbr>The<wbr>Word</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_spreadtheword_.spreadtheword.html#listener" class="tsd-kind-icon">listener</a>
-							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="_spreadtheword_.spreadtheword.html#server" class="tsd-kind-icon">server</a>
 							</li>
@@ -844,6 +860,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
 								<a href="_spreadtheword_.spreadtheword.html#addlistener" class="tsd-kind-icon">add<wbr>Listener</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_spreadtheword_.spreadtheword.html#destroy" class="tsd-kind-icon">destroy</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
 								<a href="_spreadtheword_.spreadtheword.html#emit" class="tsd-kind-icon">emit</a>

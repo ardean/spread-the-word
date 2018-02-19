@@ -5,6 +5,9 @@
     "noImplicitAny": false,
     "moduleResolution": "node",
     "module": "commonjs",
+    "lib": [
+      "es2017"
+    ],
     "target": "es6"
   },
   "include": [

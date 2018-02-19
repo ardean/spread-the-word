@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const os = require("os");
+const dnsTxt = require("dns-txt");
 const PTR_1 = require("./Records/PTR");
 const TXT_1 = require("./Records/TXT");
 const SRV_1 = require("./Records/SRV");
@@ -81,11 +82,11 @@ function getExternalAddresses() {
     return addresses;
 }
 exports.getExternalAddresses = getExternalAddresses;
-function parseRecord(record) {
+function parseRecord(record, options = {}) {
     if (record.type === "PTR")
         return new PTR_1.default(record);
     if (record.type === "TXT")
-        return new TXT_1.default(record);
+        return TXT_1.default.parse(record, { binary: options.binaryTXT });
     if (record.type === "SRV")
         return new SRV_1.default(record);
     if (record.type === "AAAA")
@@ -95,3 +96,26 @@ function parseRecord(record) {
     return null;
 }
 exports.parseRecord = parseRecord;
+function serializeRecord(record, options = {}) {
+    if (record.type === "PTR")
+        return new PTR_1.default(record);
+    if (record.type === "TXT")
+        return TXT_1.default.serialize(record, { binary: options.binaryTXT });
+    if (record.type === "SRV")
+        return new SRV_1.default(record);
+    if (record.type === "AAAA")
+        return new AAAA_1.default(record);
+    if (record.type === "A")
+        return new A_1.default(record);
+    return null;
+}
+exports.serializeRecord = serializeRecord;
+function parseTXTData(data, options = { binary: false }) {
+    const result = dnsTxt({ binary: options.binary }).decode(data);
+    return Object.keys(result).length > 0 ? result : null;
+}
+exports.parseTXTData = parseTXTData;
+function serializeTXTData(data, options = { binary: false }) {
+    return dnsTxt({ binary: options.binary }).encode(data);
+}
+exports.serializeTXTData = serializeTXTData;

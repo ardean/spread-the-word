@@ -1,6 +1,7 @@
 /// <reference types="node" />
 import { EventEmitter } from "events";
 import Record from "./Records/Record";
+import * as MDNSUtils from "./MDNSUtils";
 import Server from "./Server";
 import Response from "./Response";
 export interface ServiceOptions {
@@ -9,7 +10,7 @@ export interface ServiceOptions {
     port: number;
     protocol?: string;
     subtypes?: string[];
-    txt?: string;
+    txt?: MDNSUtils.TXTData;
     hostname?: string;
 }
 export default class Service extends EventEmitter {
@@ -21,7 +22,7 @@ export default class Service extends EventEmitter {
     protocol: string;
     hostname: string;
     port: number;
-    txt: string;
+    txt: MDNSUtils.TXTData;
     rawTxt: string;
     subtypes: string[];
     spreaded: boolean;

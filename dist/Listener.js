@@ -36,23 +36,25 @@ class Listener extends events_1.EventEmitter {
     listen() {
         return __awaiter(this, void 0, void 0, function* () {
             this.server.on("response", this.onResponse);
+            this.server.on("ownResponse", this.onResponse);
             const query = new Query_1.default({
                 questions: [{
                         name: this.typeName || Constants_1.WILDCARD,
                         type: "PTR"
                     }]
             });
-            yield this.server.query(query);
+            yield this.server.transport.query(query);
         });
     }
-    onResponse() {
+    onResponse(res, referrer) {
         const srvRecords = this.server.recordRegistry.findSRVsByType(this.typeName || Constants_1.WILDCARD);
         for (const srvRecord of srvRecords) {
             const name = MDNSUtils.parseDNSName(srvRecord.name).name;
             const remoteService = this.remoteServices.find(x => x.name === name);
             if (!remoteService) {
-                const addressRecords = this.server.recordRegistry.findAddressRecordsByFQDN(srvRecord.data.target);
-                this.addRemoteService(srvRecord, addressRecords);
+                const addressRecords = this.server.recordRegistry.findAddressRecordsByHostname(srvRecord.data.target);
+                const txtRecord = this.server.recordRegistry.findOneTXTByName(srvRecord.name);
+                this.addRemoteService(srvRecord, txtRecord, addressRecords, res, referrer);
             }
         }
         for (const remoteService of this.remoteServices) {
@@ -60,25 +62,26 @@ class Listener extends events_1.EventEmitter {
                 return MDNSUtils.parseDNSName(x.name).name === remoteService.name;
             });
             if (!srvRecord)
-                this.removeRemoteService(remoteService.name);
+                this.removeRemoteService(remoteService.name, res, referrer);
         }
     }
     destroy() {
         this.server.removeListener("response", this.onResponse);
+        this.server.removeListener("ownResponse", this.onResponse);
     }
-    addRemoteService(record, addressRecords) {
-        const remoteService = new RemoteService_1.default(record, addressRecords);
+    addRemoteService(record, txtRecord, addressRecords, res, referrer) {
+        const remoteService = new RemoteService_1.default(record, txtRecord, addressRecords);
         this.remoteServices.push(remoteService);
         debugLog("up", remoteService.name, remoteService.hostname, remoteService.port);
-        this.emit("up", remoteService);
+        this.emit("up", remoteService, res, referrer);
     }
-    removeRemoteService(name) {
+    removeRemoteService(name, res, referrer) {
         const remoteService = this.remoteServices.find(x => x.name === name);
         if (!remoteService)
             return;
         this.remoteServices.splice(this.remoteServices.indexOf(remoteService), 1);
         debugLog("down", remoteService.name, remoteService.hostname, remoteService.port);
-        this.emit("down", remoteService);
+        this.emit("down", remoteService, res, referrer);
     }
 }
 exports.default = Listener;

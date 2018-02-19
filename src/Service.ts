@@ -17,7 +17,7 @@ export interface ServiceOptions {
   port: number;
   protocol?: string;
   subtypes?: string[];
-  txt?: string;
+  txt?: MDNSUtils.TXTData;
   hostname?: string;
 }
 
@@ -30,7 +30,7 @@ export default class Service extends EventEmitter {
   protocol: string;
   hostname: string;
   port: number;
-  txt: string;
+  txt: MDNSUtils.TXTData;
   rawTxt: string;
   subtypes: string[] = [];
   spreaded: boolean = false;
@@ -38,6 +38,8 @@ export default class Service extends EventEmitter {
 
   constructor(server: Server, options: ServiceOptions) {
     super();
+
+    debugLog("new");
 
     this.server = server;
     this.name = options.name;
@@ -71,22 +73,28 @@ export default class Service extends EventEmitter {
         }]
       });
 
-      const res = await this.server.queryAndListen(query);
-      if (res && res.answers.length > 0) {
+      const queryRes = await this.server.queryAndListen(query);
+      if (queryRes && queryRes.answers.length > 0) {
         throw new Error("service_exists");
       }
     }
 
-    const answers = [
-      new PTR({ name: WILDCARD, data: this.dnsType }),
-    ].concat(this.getServiceRecords());
-
+    const answers = this.getServiceRecords();
     const additionals = this.getAddressRecords();
-    await this.broadcast(new Response({ answers, additionals }), 1000);
+
+    const res = Response.parse(
+      Response.serialize({ answers, additionals }, this.server.transportOptions),
+      this.server.transportOptions
+    );
+
+    await this.broadcast(res, 1000);
+
+    this.server.addService(this);
   }
 
   getServiceRecords(): Record[] {
     return [
+      new PTR({ name: WILDCARD, data: this.dnsType }),
       new PTR({ name: this.dnsType, data: this.dnsName }),
       new SRV({ name: this.dnsName, data: { target: this.hostname, port: this.port } }),
       new TXT({ name: this.dnsName, data: this.txt })
@@ -95,7 +103,7 @@ export default class Service extends EventEmitter {
 
   getAddressRecords(): Record[] {
     const records = [];
-    for (const { address, family } of MDNSUtils.getExternalAddresses()) {
+    for (const { address, family } of this.server.transport.getAddresses()) {
       if (family === "IPv4") {
         records.push(new A({ name: this.hostname, data: address }));
       } else {
@@ -111,7 +119,13 @@ export default class Service extends EventEmitter {
 
     debugLog("broadcast");
 
-    await this.server.respond(res);
+    await this.server.transport.respond(res);
+
+    const records = res.answers.concat(res.additionals);
+
+    for (const record of records) {
+      this.server.recordRegistry.add(record);
+    }
 
     this.spreaded = true;
 
@@ -129,13 +143,20 @@ export default class Service extends EventEmitter {
   async sendGoodbye() {
     debugLog("goodbye");
 
-    const records = this.getServiceRecords().concat(this.getAddressRecords());
+    const records = [new PTR({ name: this.dnsType, data: this.dnsName })];
 
     for (const record of records) {
       record.ttl = 0;
     }
 
-    await this.server.respond(new Response({ answers: records }));
+    const res = new Response({ answers: records });
+    await this.server.transport.respond(res);
+
+    for (const record of records) {
+      this.server.recordRegistry.remove(record);
+    }
+
+    debugLog("goodbye sent");
   }
 
   async destroy() {
