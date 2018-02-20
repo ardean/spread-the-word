@@ -22,7 +22,7 @@ class Listener extends events_1.EventEmitter {
         this.server = server;
         this.wildcard = !options.type;
         if (!this.wildcard) {
-            this.typeName = MDNSUtils.stringifyDNSName({
+            this.typeName = MDNSUtils.serializeDNSName({
                 name: options.name,
                 subtypes: options.subtypes,
                 type: options.type,

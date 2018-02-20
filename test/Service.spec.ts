@@ -11,8 +11,8 @@ import { TOP_LEVEL_DOMAIN, WILDCARD } from "../src/Constants";
 const type = "jsremote";
 const name = "remote receiver";
 const port = 4444;
-const dnsType = MDNSUtils.stringifyDNSName({ type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
-const dnsName = MDNSUtils.stringifyDNSName({ name, type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
+const dnsType = MDNSUtils.serializeDNSName({ type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
+const dnsName = MDNSUtils.serializeDNSName({ name, type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
 
 describe("Service", () => {
   let transport: Transport;

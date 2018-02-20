@@ -16,8 +16,8 @@ import SRV from "../src/Records/SRV";
 const type = "jsremote";
 const name = "remote receiver";
 const port = 4444;
-const dnsType = MDNSUtils.stringifyDNSName({ type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
-const dnsName = MDNSUtils.stringifyDNSName({ name, type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
+const dnsType = MDNSUtils.serializeDNSName({ type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
+const dnsName = MDNSUtils.serializeDNSName({ name, type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
 
 describe("Server", () => {
   describe(`server.on("respond", fn)`, () => {
@@ -155,7 +155,7 @@ describe("Server", () => {
       let answered = false;
 
       const otherName = "other remote receiver";
-      const otherDnsName = MDNSUtils.stringifyDNSName({ name: otherName, type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
+      const otherDnsName = MDNSUtils.serializeDNSName({ name: otherName, type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
 
       function onResponse(res: Response, referrer: Referrer) {
         if (res.answers.find(x => x.name === otherDnsName)) answered = true;

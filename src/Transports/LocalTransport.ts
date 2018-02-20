@@ -43,7 +43,7 @@ export default class LocalTransport extends EventEmitter implements Transport {
   async query(query: Query) {
     await new Promise(resolve => setTimeout(() => resolve(), 50));
 
-    this.emit("localQuery", JSON.parse(JSON.stringify(query)), JSON.parse(JSON.stringify(this.referrer)));
+    this.emit("localQuery", toPlainObject(query), toPlainObject(this.referrer));
   }
 
   async respond(res: Response) {
@@ -51,7 +51,7 @@ export default class LocalTransport extends EventEmitter implements Transport {
 
     await new Promise(resolve => setTimeout(() => resolve(), 50));
 
-    this.emit("localResponse", JSON.parse(JSON.stringify(res)), JSON.parse(JSON.stringify(this.referrer)));
+    this.emit("localResponse", toPlainObject(res), toPlainObject(this.referrer));
   }
 
   async destroy() {
@@ -70,4 +70,8 @@ export default class LocalTransport extends EventEmitter implements Transport {
   ownAddress(address: string) {
     return this.getAddresses().some(x => x.address === address);
   }
+}
+
+function toPlainObject(instance) {
+  return JSON.parse(JSON.stringify(instance));
 }

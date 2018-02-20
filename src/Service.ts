@@ -49,13 +49,13 @@ export default class Service extends EventEmitter {
     this.port = options.port;
     this.txt = options.txt;
     this.hostname = options.hostname || os.hostname() + "." + TOP_LEVEL_DOMAIN;
-    this.dnsType = MDNSUtils.stringifyDNSName({
+    this.dnsType = MDNSUtils.serializeDNSName({
       subtypes: this.subtypes,
       type: this.type,
       protocol: this.protocol,
       domain: TOP_LEVEL_DOMAIN
     });
-    this.dnsName = MDNSUtils.stringifyDNSName({
+    this.dnsName = MDNSUtils.serializeDNSName({
       name: this.name,
       subtypes: this.subtypes,
       type: this.type,

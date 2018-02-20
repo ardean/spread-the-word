@@ -74,10 +74,10 @@
 				<a href="LICENSE.md"><img src="https://img.shields.io/npm/l/spread-the-word.svg" alt="License"></a></p>
 				<p><em>Spread services across your local network and discover other services</em></p>
 				<h2 id="installation">Installation</h2>
-				<pre><code class="lang-shell">npm i spread-the-word
+				<pre><code class="lang-sh">$ npm i spread-the-word
 </code></pre>
 				<p>or</p>
-				<pre><code class="lang-shell">yarn add spread-the-word
+				<pre><code class="lang-sh">$ yarn add spread-the-word
 </code></pre>
 				<h2 id="usage">Usage</h2>
 				<pre><code class="lang-js"><span class="hljs-keyword">import</span> stw <span class="hljs-keyword">from</span> <span class="hljs-string">"spread-the-word"</span>;
@@ -103,18 +103,21 @@ stw.spread({
 </code></pre>
 				<h2 id="features">Features</h2>
 				<ul>
-					<li>Easy service detection &amp; advertisement on your local network</li>
-					<li><a href="https://tools.ietf.org/html/rfc6763#section-6">TXT</a> Record support<ul>
-							<li>used <a href="https://www.npmjs.com/package/dns-txt">Encoder / Decoder</a></li>
+					<li>easy service detection &amp; advertisement on your local network</li>
+					<li><a href="https://tools.ietf.org/html/rfc6763#section-6">TXT</a> record support<ul>
+							<li>used <a href="https://www.npmjs.com/package/dns-txt">encoder / decoder</a></li>
 						</ul>
 					</li>
 					<li><a href="https://tools.ietf.org/html/rfc6763#section-7.1">subtypes</a> support </li>
 					<li>auto <a href="https://tools.ietf.org/html/rfc6762#section-8.1">probing</a> on spread</li>
-					<li>No extra native dependencies</li>
+					<li>no extra native dependencies</li>
 					<li>typescript types included</li>
 				</ul>
 				<h2 id="documentation">Documentation</h2>
 				<p>You can find the latest version of documentation hosted <a href="https://ardean.github.io/spread-the-word/index.html">here</a>.</p>
+				<h2 id="debug">Debug</h2>
+				<pre><code class="lang-sh">$ DEBUG=SpreadTheWord:* yarn start
+</code></pre>
 				<h2 id="license">License</h2>
 				<p><a href="LICENSE.md">MIT</a></p>
 			</div>
@@ -125,85 +128,142 @@ stw.spread({
 					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_constants_.html">"<wbr>Constants"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_listener_.html">"<wbr>Listener"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_mdnsutils_.html">"MDNSUtils"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_query_.html">"<wbr>Query"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_question_.html">"<wbr>Question"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_recordregistry_.html">"<wbr>Record<wbr>Registry"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_records_a_.html">"<wbr>Records/<wbr>A"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_records_aaaa_.html">"<wbr>Records/AAAA"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_records_addressrecord_.html">"<wbr>Records/<wbr>Address<wbr>Record"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_records_ptr_.html">"<wbr>Records/PTR"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_records_record_.html">"<wbr>Records/<wbr>Record"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_records_srv_.html">"<wbr>Records/SRV"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_records_txt_.html">"<wbr>Records/TXT"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_records_index_.html">"<wbr>Records/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_referrer_.html">"<wbr>Referrer"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_remoteservice_.html">"<wbr>Remote<wbr>Service"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_response_.html">"<wbr>Response"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_server_.html">"<wbr>Server"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_service_.html">"<wbr>Service"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_spreadtheword_.html">"<wbr>Spread<wbr>The<wbr>Word"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_transports_localtransport_.html">"<wbr>Transports/<wbr>Local<wbr>Transport"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_transports_mdnstransport_.html">"<wbr>Transports/MDNSTransport"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_transports_transport_.html">"<wbr>Transports/<wbr>Transport"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_transports_index_.html">"<wbr>Transports/index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
-					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/a.html" class="tsd-kind-icon">A</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/aaaa.html" class="tsd-kind-icon">AAAA</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/listener.html" class="tsd-kind-icon">Listener</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/localtransport.html" class="tsd-kind-icon">Local<wbr>Transport</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/mdnstransport.html" class="tsd-kind-icon">MDNSTransport</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/ptr.html" class="tsd-kind-icon">PTR</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/query.html" class="tsd-kind-icon">Query</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/question.html" class="tsd-kind-icon">Question</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/record.html" class="tsd-kind-icon">Record</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/recordregistry.html" class="tsd-kind-icon">Record<wbr>Registry</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/referrer.html" class="tsd-kind-icon">Referrer</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/remoteservice.html" class="tsd-kind-icon">Remote<wbr>Service</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/response.html" class="tsd-kind-icon">Response</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/srv.html" class="tsd-kind-icon">SRV</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/server.html" class="tsd-kind-icon">Server</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/service.html" class="tsd-kind-icon">Service</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/spreadtheword.html" class="tsd-kind-icon">Spread<wbr>The<wbr>Word</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/txt.html" class="tsd-kind-icon">TXT</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/listeneroptions.html" class="tsd-kind-icon">Listener<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/localtransportoptions.html" class="tsd-kind-icon">Local<wbr>Transport<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/mdnsnameoptions.html" class="tsd-kind-icon">MDNSName<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/queryoptions.html" class="tsd-kind-icon">Query<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/referreroptions.html" class="tsd-kind-icon">Referrer<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/responseoptions.html" class="tsd-kind-icon">Response<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/serveroptions.html" class="tsd-kind-icon">Server<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/serviceoptions.html" class="tsd-kind-icon">Service<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/txtdata.html" class="tsd-kind-icon">TXTData</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/transport.html" class="tsd-kind-icon">Transport</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/transportoptions.html" class="tsd-kind-icon">Transport<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#addressrecord" class="tsd-kind-icon">Address<wbr>Record</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#reannounce_factor" class="tsd-kind-icon">REANNOUNCE_<wbr>FACTOR</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#reannounce_max_ms" class="tsd-kind-icon">REANNOUNCE_<wbr>MAX_<wbr>MS</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#top_level_domain" class="tsd-kind-icon">TOP_<wbr>LEVEL_<wbr>DOMAIN</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#wildcard" class="tsd-kind-icon">WILDCARD</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#debuglog" class="tsd-kind-icon">debug<wbr>Log</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#getexternaladdresses" class="tsd-kind-icon">get<wbr>External<wbr>Addresses</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#parsednsname" class="tsd-kind-icon">parseDNSName</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#parserecord" class="tsd-kind-icon">parse<wbr>Record</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#parsetxtdata" class="tsd-kind-icon">parseTXTData</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#samerecord" class="tsd-kind-icon">same<wbr>Record</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#serializednsname" class="tsd-kind-icon">serializeDNSName</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#serializerecord" class="tsd-kind-icon">serialize<wbr>Record</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#serializetxtdata" class="tsd-kind-icon">serializeTXTData</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#toplainobject" class="tsd-kind-icon">to<wbr>Plain<wbr>Object</a>
+					</li>
 				</ul>
 			</nav>
 		</div>

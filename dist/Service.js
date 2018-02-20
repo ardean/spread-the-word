@@ -32,13 +32,13 @@ class Service extends events_1.EventEmitter {
         this.port = options.port;
         this.txt = options.txt;
         this.hostname = options.hostname || os.hostname() + "." + Constants_1.TOP_LEVEL_DOMAIN;
-        this.dnsType = MDNSUtils.stringifyDNSName({
+        this.dnsType = MDNSUtils.serializeDNSName({
             subtypes: this.subtypes,
             type: this.type,
             protocol: this.protocol,
             domain: Constants_1.TOP_LEVEL_DOMAIN
         });
-        this.dnsName = MDNSUtils.stringifyDNSName({
+        this.dnsName = MDNSUtils.serializeDNSName({
             name: this.name,
             subtypes: this.subtypes,
             type: this.type,

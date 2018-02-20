@@ -37,14 +37,14 @@ class LocalTransport extends events_1.EventEmitter {
     query(query) {
         return __awaiter(this, void 0, void 0, function* () {
             yield new Promise(resolve => setTimeout(() => resolve(), 50));
-            this.emit("localQuery", JSON.parse(JSON.stringify(query)), JSON.parse(JSON.stringify(this.referrer)));
+            this.emit("localQuery", toPlainObject(query), toPlainObject(this.referrer));
         });
     }
     respond(res) {
         return __awaiter(this, void 0, void 0, function* () {
             res = Response_1.default.serialize(res, { binaryTXT: this.options.binaryTXT });
             yield new Promise(resolve => setTimeout(() => resolve(), 50));
-            this.emit("localResponse", JSON.parse(JSON.stringify(res)), JSON.parse(JSON.stringify(this.referrer)));
+            this.emit("localResponse", toPlainObject(res), toPlainObject(this.referrer));
         });
     }
     destroy() {
@@ -64,3 +64,6 @@ class LocalTransport extends events_1.EventEmitter {
     }
 }
 exports.default = LocalTransport;
+function toPlainObject(instance) {
+    return JSON.parse(JSON.stringify(instance));
+}

@@ -7,7 +7,7 @@ const TXT_1 = require("./Records/TXT");
 const SRV_1 = require("./Records/SRV");
 const AAAA_1 = require("./Records/AAAA");
 const A_1 = require("./Records/A");
-function stringifyDNSName(options) {
+function serializeDNSName(options) {
     const subtypes = (options.subtypes || [])
         .filter(x => x)
         .map(subtype => "_" + subtype)
@@ -22,7 +22,7 @@ function stringifyDNSName(options) {
         .filter(x => x)
         .join(".");
 }
-exports.stringifyDNSName = stringifyDNSName;
+exports.serializeDNSName = serializeDNSName;
 function parseDNSName(dnsName) {
     let name = "";
     let domain;

@@ -15,7 +15,7 @@ export interface MDNSNameOptions {
   domain?: string;
 }
 
-export function stringifyDNSName(options: MDNSNameOptions) {
+export function serializeDNSName(options: MDNSNameOptions) {
   const subtypes = (options.subtypes || [])
     .filter(x => x)
     .map(subtype => "_" + subtype)

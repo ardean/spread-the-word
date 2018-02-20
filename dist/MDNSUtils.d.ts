@@ -12,7 +12,7 @@ export interface MDNSNameOptions {
     protocol?: string;
     domain?: string;
 }
-export declare function stringifyDNSName(options: MDNSNameOptions): string;
+export declare function serializeDNSName(options: MDNSNameOptions): string;
 export declare function parseDNSName(dnsName: string): MDNSNameOptions;
 export declare function sameRecord(a: Record, b: Record): boolean;
 export declare function getExternalAddresses(): {
