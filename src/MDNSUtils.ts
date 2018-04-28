@@ -35,7 +35,7 @@ export function parseDNSName(dnsName: string): MDNSNameOptions {
   let name = "";
   let domain;
   const parts = dnsName.split(".");
-  const prefixed = [];
+  const prefixed: string[] = [];
   for (let index = 0; index < parts.length; index++) {
     const part = parts[index];
     if (part[0] === "_") {
