@@ -4,6 +4,10 @@ import * as MDNSUtils from "./MDNSUtils";
 import AddressRecord from "./Records/AddressRecord";
 export default class RemoteService {
     name: string;
+    type: string;
+    subtypes: string[];
+    protocol: string;
+    domain: string;
     hostname: string;
     port: number;
     txt?: MDNSUtils.TXTData;
