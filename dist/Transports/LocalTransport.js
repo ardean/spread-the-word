@@ -19,18 +19,15 @@ class LocalTransport extends events_1.EventEmitter {
         this.destroyed = false;
         this.options = options;
         this.referrer = new Referrer_1.default(options.referrerOptions);
-        this.referrer.ownAddress = this.ownAddress(this.referrer.address);
         this.addresses = options.addresses;
         this.on("localQuery", (packet, referrerObj) => {
             const query = new Query_1.default(packet);
             const referrer = new Referrer_1.default(referrerObj);
-            referrer.ownAddress = this.ownAddress(referrer.address);
             this.emit("query", query, referrer);
         });
         this.on("localResponse", (packet, referrerObj) => {
             const res = Response_1.default.parse(packet, { binaryTXT: this.options.binaryTXT });
             const referrer = new Referrer_1.default(referrerObj);
-            referrer.ownAddress = this.ownAddress(referrer.address);
             this.emit("response", res, referrer);
         });
     }
@@ -58,9 +55,6 @@ class LocalTransport extends events_1.EventEmitter {
     }
     getAddresses() {
         return this.addresses;
-    }
-    ownAddress(address) {
-        return this.getAddresses().some(x => x.address === address);
     }
 }
 exports.default = LocalTransport;

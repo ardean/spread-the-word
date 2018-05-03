@@ -21,7 +21,6 @@ export default class MDNSTransport extends EventEmitter implements Transport {
     this.mdns.on("query", async (packet, referrerObj) => {
       const query = new Query(packet);
       const referrer = new Referrer(referrerObj);
-      referrer.ownAddress = this.ownAddress(referrer.address);
 
       this.emit("query", query, referrer);
     });
@@ -29,7 +28,6 @@ export default class MDNSTransport extends EventEmitter implements Transport {
     this.mdns.on("response", (packet, referrerObj) => {
       const res = Response.parse(packet, { binaryTXT: this.options.binaryTXT });
       const referrer = new Referrer(referrerObj);
-      referrer.ownAddress = this.ownAddress(referrer.address);
 
       this.emit("response", res, referrer);
     });
@@ -67,9 +65,5 @@ export default class MDNSTransport extends EventEmitter implements Transport {
 
   getAddresses(): Array<{ family: string, address: string }> {
     return MDNSUtils.getExternalAddresses();
-  }
-
-  ownAddress(address: string) {
-    return this.getAddresses().some(x => x.address === address);
   }
 }

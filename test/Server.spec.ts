@@ -16,6 +16,8 @@ import SRV from "../src/Records/SRV";
 const type = "jsremote";
 const name = "remote receiver";
 const port = 4444;
+const ownAddress = "192.168.1.51";
+const otherAddress = "192.168.1.55";
 const dnsType = MDNSUtils.serializeDNSName({ type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
 const dnsName = MDNSUtils.serializeDNSName({ name, type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
 
@@ -26,8 +28,8 @@ describe("Server", () => {
 
     beforeEach(async () => {
       transport = new LocalTransport({
-        referrerOptions: { address: "192.168.1.51" },
-        addresses: [{ family: "IPv4", address: "192.168.1.51" }]
+        referrerOptions: { address: ownAddress },
+        addresses: [{ family: "IPv4", address: ownAddress }]
       });
       server = new Server({ transport });
     });
@@ -36,30 +38,22 @@ describe("Server", () => {
       await server.destroy();
     });
 
-    it("ignores own responses", async () => {
-      let foundOwnResponse = false;
+    it("accepts responses", async () => {
       let foundResponse = false;
-
-      function onOwnResponse(res: Response, referrer: Referrer) {
-        foundOwnResponse = true;
-      }
 
       function onResponse(res: Response, referrer: Referrer) {
         foundResponse = true;
       }
 
-      server.on("ownResponse", onOwnResponse);
       server.on("response", onResponse);
 
       transport.respond(new Response({ answers: [new PTR({ name: dnsType, data: dnsName })] }));
 
       await new Promise(resolve => setTimeout(() => resolve(), 1000));
 
-      server.removeListener("ownResponse", onOwnResponse);
       server.removeListener("response", onResponse);
 
-      assert.isTrue(foundOwnResponse);
-      assert.isFalse(foundResponse);
+      assert.isTrue(foundResponse);
     });
   });
 
@@ -69,8 +63,8 @@ describe("Server", () => {
 
     beforeEach(async () => {
       transport = new LocalTransport({
-        referrerOptions: { address: "192.168.1.51" },
-        addresses: [{ family: "IPv4", address: "192.168.1.51" }]
+        referrerOptions: { address: ownAddress },
+        addresses: [{ family: "IPv4", address: ownAddress }]
       });
       server = new Server({ transport });
     });
@@ -79,30 +73,22 @@ describe("Server", () => {
       await server.destroy();
     });
 
-    it("ignores own queries", async () => {
-      let foundOwnQuery = false;
+    it("accepts queries", async () => {
       let foundQuery = false;
-
-      function onOwnQuery(query: Query, referrer: Referrer) {
-        foundOwnQuery = true;
-      }
 
       function onQuery(query: Query, referrer: Referrer) {
         foundQuery = true;
       }
 
-      server.on("ownQuery", onOwnQuery);
       server.on("query", onQuery);
 
       transport.query(new Query({ questions: [{ name: "own", type: "jsremote" }] }));
 
       await new Promise(resolve => setTimeout(() => resolve(), 500));
 
-      server.removeListener("ownQuery", onOwnQuery);
       server.removeListener("query", onQuery);
 
-      assert.isTrue(foundOwnQuery);
-      assert.isFalse(foundQuery);
+      assert.isTrue(foundQuery);
     });
   });
 
@@ -112,8 +98,8 @@ describe("Server", () => {
 
     beforeEach(async () => {
       transport = new LocalTransport({
-        referrerOptions: { address: "192.168.1.51" },
-        addresses: [{ family: "IPv4", address: "192.168.1.55" }]
+        referrerOptions: { address: ownAddress },
+        addresses: [{ family: "IPv4", address: otherAddress }]
       });
       server = new Server({ transport });
     });
@@ -122,7 +108,7 @@ describe("Server", () => {
       await server.destroy();
     });
 
-    it("answers on own services", async () => {
+    it("answers regarding own services", async () => {
       let answered = false;
 
       const service = new Service(server, {
@@ -141,7 +127,7 @@ describe("Server", () => {
 
       await server.answerQuery(
         new Query({ questions: [{ name: dnsName, type: "ANY" }] }),
-        new Referrer({ address: "192.168.1.52" })
+        new Referrer({ address: otherAddress })
       );
 
       await new Promise(resolve => setTimeout(() => resolve(), 500));
@@ -151,7 +137,7 @@ describe("Server", () => {
       assert.isTrue(answered, "does answer");
     });
 
-    it("does not answer on other services", async () => {
+    it("does not answer regarding other services", async () => {
       let answered = false;
 
       const otherName = "other remote receiver";
@@ -165,7 +151,7 @@ describe("Server", () => {
 
       await server.answerQuery(
         new Query({ questions: [{ name: otherDnsName, type: "ANY" }] }),
-        new Referrer({ address: "192.168.1.52" })
+        new Referrer({ address: otherAddress })
       );
 
       await new Promise(resolve => setTimeout(() => resolve(), 500));

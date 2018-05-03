@@ -50,7 +50,6 @@ export default class Listener extends EventEmitter {
 
   async listen() {
     this.server.on("response", this.onResponse);
-    this.server.on("ownResponse", this.onResponse);
 
     const query = new Query({
       questions: [{
@@ -84,7 +83,6 @@ export default class Listener extends EventEmitter {
 
   destroy() {
     this.server.removeListener("response", this.onResponse);
-    this.server.removeListener("ownResponse", this.onResponse);
   }
 
   addRemoteService(record: SRV, txtRecord: TXT, addressRecords: AddressRecord[], res: Response, referrer: Referrer) {

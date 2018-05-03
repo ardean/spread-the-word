@@ -36,7 +36,6 @@ class Listener extends events_1.EventEmitter {
     listen() {
         return __awaiter(this, void 0, void 0, function* () {
             this.server.on("response", this.onResponse);
-            this.server.on("ownResponse", this.onResponse);
             const query = new Query_1.default({
                 questions: [{
                         name: this.typeName || Constants_1.WILDCARD,
@@ -67,7 +66,6 @@ class Listener extends events_1.EventEmitter {
     }
     destroy() {
         this.server.removeListener("response", this.onResponse);
-        this.server.removeListener("ownResponse", this.onResponse);
     }
     addRemoteService(record, txtRecord, addressRecords, res, referrer) {
         const remoteService = new RemoteService_1.default(record, txtRecord, addressRecords);

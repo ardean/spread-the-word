@@ -15,5 +15,4 @@ export default class MDNSTransport extends EventEmitter implements Transport {
         family: string;
         address: string;
     }>;
-    ownAddress(address: string): boolean;
 }

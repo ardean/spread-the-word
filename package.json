@@ -1,6 +1,6 @@
 {
   "name": "spread-the-word",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "A Bonjour / Zeroconf implementation in JavaScript",
   "repository": "https://github.com/ardean/spread-the-word",
   "bugs": "https://github.com/ardean/spread-the-word/issues",
@@ -28,7 +28,7 @@
     "build-src": "tsc",
     "build-docs": "typedoc --out ./docs ./src --hideGenerator --excludePrivate --mode file && touch ./docs/.nojekyll",
     "prepublish": "yarn build && yarn build-docs",
-    "test": "mocha -r ts-node/register test/*.spec.ts",
+    "test": "mocha -r ts-node/register test/*.spec.ts --exit",
     "tslint": "tslint -p tsconfig.json"
   },
   "dependencies": {

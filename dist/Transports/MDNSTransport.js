@@ -24,13 +24,11 @@ class MDNSTransport extends events_1.EventEmitter {
         this.mdns.on("query", (packet, referrerObj) => __awaiter(this, void 0, void 0, function* () {
             const query = new Query_1.default(packet);
             const referrer = new Referrer_1.default(referrerObj);
-            referrer.ownAddress = this.ownAddress(referrer.address);
             this.emit("query", query, referrer);
         }));
         this.mdns.on("response", (packet, referrerObj) => {
             const res = Response_1.default.parse(packet, { binaryTXT: this.options.binaryTXT });
             const referrer = new Referrer_1.default(referrerObj);
-            referrer.ownAddress = this.ownAddress(referrer.address);
             this.emit("response", res, referrer);
         });
     }
@@ -72,9 +70,6 @@ class MDNSTransport extends events_1.EventEmitter {
     }
     getAddresses() {
         return MDNSUtils.getExternalAddresses();
-    }
-    ownAddress(address) {
-        return this.getAddresses().some(x => x.address === address);
     }
 }
 exports.default = MDNSTransport;

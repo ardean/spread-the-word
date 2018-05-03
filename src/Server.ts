@@ -39,18 +39,15 @@ export default class Server extends EventEmitter {
     this.recordRegistry = options.recordRegistry || new RecordRegistry();
 
     this.transport.on("query", async (query: Query, referrer: Referrer) => {
-      debugLog(`query from ${referrer.address}${referrer.ownAddress ? " (own address)" : ""}`);
+      debugLog(`query from ${referrer.address}`);
 
-      if (referrer.ownAddress) return this.emit("ownQuery", query, referrer);
       this.emit("query", query, referrer);
 
       await this.answerQuery(query, referrer);
     });
 
     this.transport.on("response", (res: Response, referrer: Referrer) => {
-      debugLog(`response from ${referrer.address}${referrer.ownAddress ? " (own address)" : ""}`);
-
-      if (referrer.ownAddress) return this.emit("ownResponse", res, referrer);
+      debugLog(`response from ${referrer.address}`);
 
       const addedRecords = [];
       const removedRecords = [];

@@ -27,5 +27,4 @@ export default class LocalTransport extends EventEmitter implements Transport {
         family: string;
         address: string;
     }>;
-    ownAddress(address: string): boolean;
 }

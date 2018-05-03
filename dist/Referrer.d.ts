@@ -9,6 +9,5 @@ export default class Referrer {
     family: string;
     port: number;
     size: number;
-    ownAddress: boolean;
     constructor({address, family, port, size}?: ReferrerOptions);
 }

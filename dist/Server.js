@@ -24,16 +24,12 @@ class Server extends events_1.EventEmitter {
         this.transport = options.transport || new MDNSTransport_1.default(this.transportOptions);
         this.recordRegistry = options.recordRegistry || new RecordRegistry_1.default();
         this.transport.on("query", (query, referrer) => __awaiter(this, void 0, void 0, function* () {
-            debugLog(`query from ${referrer.address}${referrer.ownAddress ? " (own address)" : ""}`);
-            if (referrer.ownAddress)
-                return this.emit("ownQuery", query, referrer);
+            debugLog(`query from ${referrer.address}`);
             this.emit("query", query, referrer);
             yield this.answerQuery(query, referrer);
         }));
         this.transport.on("response", (res, referrer) => {
-            debugLog(`response from ${referrer.address}${referrer.ownAddress ? " (own address)" : ""}`);
-            if (referrer.ownAddress)
-                return this.emit("ownResponse", res, referrer);
+            debugLog(`response from ${referrer.address}`);
             const addedRecords = [];
             const removedRecords = [];
             const records = res.answers.concat(res.additionals);

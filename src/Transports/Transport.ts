@@ -11,5 +11,4 @@ export default interface Transport extends EventEmitter {
   respond(res: Response): Promise<void>;
   destroy(): Promise<void>;
   getAddresses();
-  ownAddress(address: string): boolean;
 }
