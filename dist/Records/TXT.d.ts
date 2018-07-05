@@ -11,8 +11,8 @@ export default class TXT extends Record {
     });
     static parse(record: any, options?: {
         binary?: boolean;
-    }): default;
+    }): TXT;
     static serialize(record: any, options?: {
         binary?: boolean;
-    }): default;
+    }): TXT;
 }

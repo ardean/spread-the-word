@@ -15,7 +15,7 @@ export default class Response {
     this.additionals = options.additionals || [];
   }
 
-  static parse(options: ResponseOptions, parseOptions?) {
+  static parse(options: ResponseOptions, parseOptions?): Response {
     const answers = (options.answers || [])
       .map(x => MDNSUtils.parseRecord(x, parseOptions))
       .filter(x => x);
@@ -30,7 +30,7 @@ export default class Response {
     });
   }
 
-  static serialize(options: ResponseOptions, serializeOptions?) {
+  static serialize(options: ResponseOptions, serializeOptions?): Response {
     const answers = (options.answers || [])
       .map(x => MDNSUtils.serializeRecord(x, serializeOptions))
       .filter(x => x);

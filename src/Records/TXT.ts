@@ -16,7 +16,7 @@ export default class TXT extends Record {
     this.ttl = typeof ttl === "number" ? ttl : 4500;
   }
 
-  static parse(record, options: { binary?: boolean } = {}) {
+  static parse(record, options: { binary?: boolean } = {}): TXT {
     debugLog("parse", record.data, options);
     const data = parseTXTData(record.data, options);
     debugLog("parse output", data, options);
@@ -27,7 +27,7 @@ export default class TXT extends Record {
     });
   }
 
-  static serialize(record, options: { binary?: boolean } = {}) {
+  static serialize(record, options: { binary?: boolean } = {}): TXT {
     debugLog("serialize", record.data, options);
     const data = serializeTXTData(record.data, options);
     debugLog("serialize output", data, options);
