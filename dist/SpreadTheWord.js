@@ -53,7 +53,7 @@ class SpreadTheWord extends events_1.EventEmitter {
     }
     destroy() {
         return __awaiter(this, void 0, void 0, function* () {
-            if (this.status !== "Destroyed")
+            if (this.status === "Destroyed")
                 return;
             this.status = "Destroyed";
             for (const service of this.services) {
