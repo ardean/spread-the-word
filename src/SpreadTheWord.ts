@@ -54,7 +54,7 @@ export default class SpreadTheWord extends EventEmitter {
   }
 
   async destroy() {
-    if (this.status !== "Destroyed") return;
+    if (this.status === "Destroyed") return;
     this.status = "Destroyed";
 
     for (const service of this.services) {

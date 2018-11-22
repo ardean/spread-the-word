@@ -1,6 +1,6 @@
 {
   "name": "spread-the-word",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "A Bonjour / Zeroconf implementation in JavaScript",
   "repository": "https://github.com/ardean/spread-the-word",
   "bugs": "https://github.com/ardean/spread-the-word/issues",
