@@ -3,8 +3,8 @@ import Server from "../src/Server";
 import Service from "../src/Service";
 import Response from "../src/Response";
 import * as MDNSUtils from "../src/MDNSUtils";
-import Transport from "../src/transport/Transport";
-import LocalTransport from "../src/transport/LocalTransport";
+import Transport from "../src/transports/Transport";
+import LocalTransport from "../src/transports/LocalTransport";
 import { TOP_LEVEL_DOMAIN, WILDCARD } from "../src/Constants";
 
 const type = "jsremote";

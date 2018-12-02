@@ -5,8 +5,8 @@ import Service from "./Service";
 import Response from "./Response";
 import Query from "./Query";
 import { ServerOptions } from "./Server";
-import Transport, { TransportOptions } from "./transport/Transport";
-import MDNSTransport from "./transport/MDNSTransport";
+import Transport, { TransportOptions } from "./transports/Transport";
+import MDNSTransport from "./transports/MDNSTransport";
 import Referrer from "./Referrer";
 import { WILDCARD } from "./Constants";
 

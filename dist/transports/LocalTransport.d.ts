@@ -1,9 +1,9 @@
 /// <reference types="node" />
-import Transport, { TransportOptions } from "./Transport";
-import { EventEmitter } from "events";
 import Query from "../Query";
 import Response from "../Response";
+import { EventEmitter } from "events";
 import Referrer, { ReferrerOptions } from "../Referrer";
+import Transport, { TransportOptions } from "./Transport";
 export interface LocalTransportOptions extends TransportOptions {
     referrerOptions: ReferrerOptions;
     addresses: Array<{

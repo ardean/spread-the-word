@@ -1,4 +1,4 @@
-import Record from "./record/Record";
+import Record from "./records/Record";
 import * as MDNSUtils from "./MDNSUtils";
 
 export interface ResponseOptions {

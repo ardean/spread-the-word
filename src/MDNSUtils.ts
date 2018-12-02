@@ -1,11 +1,11 @@
 import * as os from "os";
-import A from "./record/A";
-import TXT from "./record/TXT";
-import SRV from "./record/SRV";
-import PTR from "./record/PTR";
-import AAAA from "./record/AAAA";
+import A from "./records/A";
+import TXT from "./records/TXT";
+import SRV from "./records/SRV";
+import PTR from "./records/PTR";
+import AAAA from "./records/AAAA";
 import * as dnsTxt from "dns-txt";
-import Record from "./record/Record";
+import Record from "./records/Record";
 
 export interface MDNSNameOptions {
   name?: string;

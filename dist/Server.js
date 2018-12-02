@@ -4,7 +4,7 @@ const debug = require("debug");
 const events_1 = require("events");
 const RecordRegistry_1 = require("./RecordRegistry");
 const Response_1 = require("./Response");
-const MDNSTransport_1 = require("./transport/MDNSTransport");
+const MDNSTransport_1 = require("./transports/MDNSTransport");
 const Constants_1 = require("./Constants");
 const debugLog = debug("SpreadTheWord:Server");
 class Server extends events_1.EventEmitter {

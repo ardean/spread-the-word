@@ -6,7 +6,7 @@ const debug = require("debug");
 const Response_1 = require("./Response");
 const events_1 = require("events");
 const MDNSUtils = require("./MDNSUtils");
-const record_1 = require("./record");
+const records_1 = require("./records");
 const Constants_1 = require("./Constants");
 const debugLog = debug("SpreadTheWord:Service");
 class Service extends events_1.EventEmitter {
@@ -59,20 +59,20 @@ class Service extends events_1.EventEmitter {
     }
     getServiceRecords() {
         return [
-            new record_1.PTR({ name: Constants_1.WILDCARD, data: this.dnsType }),
-            new record_1.PTR({ name: this.dnsType, data: this.dnsName }),
-            new record_1.SRV({ name: this.dnsName, data: { target: this.hostname, port: this.port } }),
-            new record_1.TXT({ name: this.dnsName, data: this.txt })
+            new records_1.PTR({ name: Constants_1.WILDCARD, data: this.dnsType }),
+            new records_1.PTR({ name: this.dnsType, data: this.dnsName }),
+            new records_1.SRV({ name: this.dnsName, data: { target: this.hostname, port: this.port } }),
+            new records_1.TXT({ name: this.dnsName, data: this.txt })
         ];
     }
     getAddressRecords() {
         const records = [];
         for (const { address, family } of this.server.transport.getAddresses()) {
             if (family === "IPv4") {
-                records.push(new record_1.A({ name: this.hostname, data: address }));
+                records.push(new records_1.A({ name: this.hostname, data: address }));
             }
             else {
-                records.push(new record_1.AAAA({ name: this.hostname, data: address }));
+                records.push(new records_1.AAAA({ name: this.hostname, data: address }));
             }
         }
         return records;
@@ -97,7 +97,7 @@ class Service extends events_1.EventEmitter {
     }
     async sendGoodbye() {
         debugLog("goodbye");
-        const records = [new record_1.PTR({ name: this.dnsType, data: this.dnsName })];
+        const records = [new records_1.PTR({ name: this.dnsType, data: this.dnsName })];
         for (const record of records) {
             record.ttl = 0;
         }

@@ -1,12 +1,12 @@
 /// <reference types="node" />
 import Server from "./Server";
-import SRV from "./record/SRV";
-import TXT from "./record/TXT";
+import SRV from "./records/SRV";
+import TXT from "./records/TXT";
 import Response from "./Response";
 import Referrer from "./Referrer";
 import { EventEmitter } from "events";
 import RemoteService from "./RemoteService";
-import AddressRecord from "./record/AddressRecord";
+import AddressRecord from "./records/AddressRecord";
 export interface ListenerOptions {
     name?: string;
     type?: string;

@@ -1,8 +1,8 @@
 import Server from "../src/Server";
 import Service from "../src/Service";
 import Listener from "../src/Listener";
-import Transport from "../src/transport/Transport";
-import LocalTransport from "../src/transport/LocalTransport";
+import Transport from "../src/transports/Transport";
+import LocalTransport from "../src/transports/LocalTransport";
 
 const type = "jsremote";
 const name = "remote receiver";

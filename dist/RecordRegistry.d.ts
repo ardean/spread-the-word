@@ -1,7 +1,7 @@
-import TXT from "./record/TXT";
-import SRV from "./record/SRV";
-import Record from "./record/Record";
-import AddressRecord from "./record/AddressRecord";
+import TXT from "./records/TXT";
+import SRV from "./records/SRV";
+import Record from "./records/Record";
+import AddressRecord from "./records/AddressRecord";
 export default class RecordRegistry {
     records: Record[];
     add(record: Record): Record;

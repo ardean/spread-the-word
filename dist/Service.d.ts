@@ -2,7 +2,7 @@
 import Server from "./Server";
 import Response from "./Response";
 import { EventEmitter } from "events";
-import Record from "./record/Record";
+import Record from "./records/Record";
 import * as MDNSUtils from "./MDNSUtils";
 export interface ServiceOptions {
     name: string;

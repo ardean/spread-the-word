@@ -4,9 +4,9 @@ import Server from "./Server";
 import * as debug from "debug";
 import Response from "./Response";
 import { EventEmitter } from "events";
-import Record from "./record/Record";
+import Record from "./records/Record";
 import * as MDNSUtils from "./MDNSUtils";
-import { A, AAAA, PTR, TXT, SRV } from "./record";
+import { A, AAAA, PTR, TXT, SRV } from "./records";
 import { TOP_LEVEL_DOMAIN, REANNOUNCE_FACTOR, REANNOUNCE_MAX_MS, WILDCARD } from "./Constants";
 
 const debugLog = debug("SpreadTheWord:Service");

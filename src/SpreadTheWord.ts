@@ -1,10 +1,10 @@
+import Referrer from "./Referrer";
+import Response from "./Response";
 import { EventEmitter } from "events";
-import Listener, { ListenerOptions } from "./Listener";
+import RemoteService from "./RemoteService";
 import Server, { ServerOptions } from "./Server";
 import Service, { ServiceOptions } from "./Service";
-import RemoteService from "./RemoteService";
-import Response from "./Response";
-import Referrer from "./Referrer";
+import Listener, { ListenerOptions } from "./Listener";
 
 export type StatusType = "uninitialized" | "spreaded" | "destroyed";
 

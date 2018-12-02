@@ -1,4 +1,4 @@
-import Record from "./record/Record";
+import Record from "./records/Record";
 export interface ResponseOptions {
     answers?: Record[];
     additionals?: Record[];

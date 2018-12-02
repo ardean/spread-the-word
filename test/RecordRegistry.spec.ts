@@ -1,9 +1,9 @@
 import { assert } from "chai";
-import A from "../src/record/A";
-import SRV from "../src/record/SRV";
-import TXT from "../src/record/TXT";
-import PTR from "../src/record/PTR";
-import AAAA from "../src/record/AAAA";
+import A from "../src/records/A";
+import SRV from "../src/records/SRV";
+import TXT from "../src/records/TXT";
+import PTR from "../src/records/PTR";
+import AAAA from "../src/records/AAAA";
 import { WILDCARD } from "../src/Constants";
 import { sameRecord } from "../src/MDNSUtils";
 import RecordRegistry from "../src/RecordRegistry";

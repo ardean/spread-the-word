@@ -1,8 +1,8 @@
-import TXT from "./record/TXT";
-import SRV from "./record/SRV";
-import Record from "./record/Record";
+import TXT from "./records/TXT";
+import SRV from "./records/SRV";
+import Record from "./records/Record";
 import * as MDNSUtils from "./MDNSUtils";
-import AddressRecord from "./record/AddressRecord";
+import AddressRecord from "./records/AddressRecord";
 
 export default class RecordRegistry {
   records: Record[] = [];

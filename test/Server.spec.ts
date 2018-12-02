@@ -1,14 +1,14 @@
 import { assert } from "chai";
 import Query from "../src/Query";
 import Server from "../src/Server";
-import PTR from "../src/record/PTR";
+import PTR from "../src/records/PTR";
 import Service from "../src/Service";
 import Referrer from "../src/Referrer";
 import Response from "../src/Response";
 import * as MDNSUtils from "../src/MDNSUtils";
-import Transport from "../src/transport/Transport";
+import Transport from "../src/transports/Transport";
 import { TOP_LEVEL_DOMAIN } from "../src/Constants";
-import LocalTransport from "../src/transport/LocalTransport";
+import LocalTransport from "../src/transports/LocalTransport";
 
 const type = "jsremote";
 const name = "remote receiver";

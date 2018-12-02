@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const events_1 = require("events");
-const Listener_1 = require("./Listener");
 const Server_1 = require("./Server");
 const Service_1 = require("./Service");
+const Listener_1 = require("./Listener");
 class SpreadTheWord extends events_1.EventEmitter {
     constructor() {
         super(...arguments);

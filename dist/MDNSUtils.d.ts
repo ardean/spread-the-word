@@ -1,10 +1,10 @@
 /// <reference types="node" />
-import A from "./record/A";
-import TXT from "./record/TXT";
-import SRV from "./record/SRV";
-import PTR from "./record/PTR";
-import AAAA from "./record/AAAA";
-import Record from "./record/Record";
+import A from "./records/A";
+import TXT from "./records/TXT";
+import SRV from "./records/SRV";
+import PTR from "./records/PTR";
+import AAAA from "./records/AAAA";
+import Record from "./records/Record";
 export interface MDNSNameOptions {
     name?: string;
     subtypes?: string[];

@@ -1,14 +1,14 @@
 import Query from "./Query";
 import Server from "./Server";
 import * as debug from "debug";
-import SRV from "./record/SRV";
-import TXT from "./record/TXT";
+import SRV from "./records/SRV";
+import TXT from "./records/TXT";
 import Response from "./Response";
 import Referrer from "./Referrer";
 import { EventEmitter } from "events";
 import * as MDNSUtils from "./MDNSUtils";
 import RemoteService from "./RemoteService";
-import AddressRecord from "./record/AddressRecord";
+import AddressRecord from "./records/AddressRecord";
 import { TOP_LEVEL_DOMAIN, WILDCARD } from "./Constants";
 
 const debugLog = debug("SpreadTheWord:Listener");
