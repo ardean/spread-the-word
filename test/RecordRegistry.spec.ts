@@ -1,12 +1,12 @@
 import { assert } from "chai";
+import A from "../src/record/A";
+import SRV from "../src/record/SRV";
+import TXT from "../src/record/TXT";
+import PTR from "../src/record/PTR";
+import AAAA from "../src/record/AAAA";
 import { WILDCARD } from "../src/Constants";
-import RecordRegistry from "../src/RecordRegistry";
-import PTR from "../src/Records/PTR";
-import SRV from "../src/Records/SRV";
-import TXT from "../src/Records/TXT";
-import AAAA from "../src/Records/AAAA";
-import A from "../src/Records/A";
 import { sameRecord } from "../src/MDNSUtils";
+import RecordRegistry from "../src/RecordRegistry";
 
 const typeName = "_jsremote._tcp.local";
 

@@ -1,9 +1,8 @@
-import { assert } from "chai";
 import Server from "../src/Server";
 import Service from "../src/Service";
 import Listener from "../src/Listener";
-import Transport from "../src/Transports/Transport";
-import LocalTransport from "../src/Transports/LocalTransport";
+import Transport from "../src/transport/Transport";
+import LocalTransport from "../src/transport/LocalTransport";
 
 const type = "jsremote";
 const name = "remote receiver";

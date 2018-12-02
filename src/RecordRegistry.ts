@@ -1,8 +1,8 @@
+import TXT from "./record/TXT";
+import SRV from "./record/SRV";
+import Record from "./record/Record";
 import * as MDNSUtils from "./MDNSUtils";
-import Record from "./Records/Record";
-import SRV from "./Records/SRV";
-import TXT from "./Records/TXT";
-import AddressRecord from "./Records/AddressRecord";
+import AddressRecord from "./record/AddressRecord";
 
 export default class RecordRegistry {
   records: Record[] = [];
@@ -89,8 +89,7 @@ export default class RecordRegistry {
     return this.find(x => (x.type === "A" || x.type === "AAAA") && x.name === hostname);
   }
 
-  // tslint:disable-next-line:no-any
-  find(filter?: (record: Record, index: number) => any) {
+  find(filter?: (record: Record, index: number) => boolean) {
     this.keepHouse();
 
     return filter ?
@@ -98,8 +97,7 @@ export default class RecordRegistry {
       this.records.concat();
   }
 
-  // tslint:disable-next-line:no-any
-  findOne(filter: (record: Record, index: number) => any) {
+  findOne(filter: (record: Record, index: number) => boolean) {
     return this.find().find(filter);
   }
 

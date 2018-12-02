@@ -5,7 +5,7 @@ import Service from "./Service";
 import Response from "./Response";
 import Query from "./Query";
 import { ServerOptions } from "./Server";
-import Transport, { TransportOptions } from "./Transports/Transport";
+import Transport, { TransportOptions } from "./transport/Transport";
 import Referrer from "./Referrer";
 export interface ServerOptions {
     transportOptions?: TransportOptions;

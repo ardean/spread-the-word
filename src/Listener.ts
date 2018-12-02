@@ -1,17 +1,15 @@
-import * as MDNSUtils from "./MDNSUtils";
-import RemoteService from "./RemoteService";
-import { TOP_LEVEL_DOMAIN, WILDCARD } from "./Constants";
-import { EventEmitter } from "events";
-import * as debug from "debug";
-import SRV from "./Records/SRV";
-import Service from "./Service";
-import Server from "./Server";
 import Query from "./Query";
-import Question from "./Question";
-import AddressRecord from "./Records/AddressRecord";
+import Server from "./Server";
+import * as debug from "debug";
+import SRV from "./record/SRV";
+import TXT from "./record/TXT";
 import Response from "./Response";
 import Referrer from "./Referrer";
-import TXT from "./Records/TXT";
+import { EventEmitter } from "events";
+import * as MDNSUtils from "./MDNSUtils";
+import RemoteService from "./RemoteService";
+import AddressRecord from "./record/AddressRecord";
+import { TOP_LEVEL_DOMAIN, WILDCARD } from "./Constants";
 
 const debugLog = debug("SpreadTheWord:Listener");
 
@@ -44,8 +42,6 @@ export default class Listener extends EventEmitter {
       });
       this.wildcard = false;
     }
-
-    this.onResponse = this.onResponse.bind(this);
   }
 
   async listen() {
@@ -61,7 +57,7 @@ export default class Listener extends EventEmitter {
     await this.server.transport.query(query);
   }
 
-  onResponse(res: Response, referrer: Referrer) {
+  onResponse = (res: Response, referrer: Referrer) => {
     const srvRecords = this.server.recordRegistry.findSRVsByType(this.typeName || WILDCARD);
     for (const srvRecord of srvRecords) {
       const name = MDNSUtils.parseDNSName(srvRecord.name).name;

@@ -1,12 +1,13 @@
 /// <reference types="node" />
 import Record from "./Record";
 import { TXTData } from "../MDNSUtils";
+declare type DataType = TXTData | Buffer | string;
 export default class TXT extends Record {
     name: string;
-    data: TXTData | Buffer;
-    constructor({name, data, ttl}: {
+    data: DataType;
+    constructor({ name, data, ttl }: {
         name: string;
-        data: TXTData | Buffer;
+        data: DataType;
         ttl?: number;
     });
     static parse(record: any, options?: {
@@ -16,3 +17,4 @@ export default class TXT extends Record {
         binary?: boolean;
     }): TXT;
 }
+export {};

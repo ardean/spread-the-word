@@ -1,9 +1,9 @@
 /// <reference types="node" />
-import { EventEmitter } from "events";
-import Record from "./Records/Record";
-import * as MDNSUtils from "./MDNSUtils";
 import Server from "./Server";
 import Response from "./Response";
+import { EventEmitter } from "events";
+import Record from "./record/Record";
+import * as MDNSUtils from "./MDNSUtils";
 export interface ServiceOptions {
     name: string;
     type: string;

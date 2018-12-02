@@ -8,12 +8,12 @@ export { default as Service } from "./Service";
 export { default as Listener } from "./Listener";
 export { default as SpreadTheWord } from "./SpreadTheWord";
 
-import * as Records from "./Records";
-import * as Transports from "./Transports";
+import * as records from "./record";
+import * as transports from "./transport";
 import * as MDNSUtils from "./MDNSUtils";
 export {
-  Records,
-  Transports,
+  records,
+  transports,
   MDNSUtils
 };
 

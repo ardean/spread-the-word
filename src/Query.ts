@@ -1,4 +1,3 @@
-import * as MDNSUtils from "./MDNSUtils";
 import Question from "./Question";
 
 export interface QueryOptions {

@@ -6,20 +6,22 @@ import RemoteService from "./RemoteService";
 import Response from "./Response";
 import Referrer from "./Referrer";
 
+export type StatusType = "uninitialized" | "spreaded" | "destroyed";
+
 export default class SpreadTheWord extends EventEmitter {
   server: Server;
   services: Service[] = [];
-  status: string = "Uninitialized";
+  status: StatusType = "uninitialized";
 
   init(options?: ServerOptions) {
-    if (this.status !== "Uninitialized") return;
+    if (this.status !== "uninitialized") return;
 
-    this.status = "Spreaded";
+    this.status = "spreaded";
     this.server = new Server(options);
   }
 
   async spread(options: ServiceOptions, serverOptions?: ServerOptions) {
-    if (this.status === "Destroyed") return;
+    if (this.status === "destroyed") return;
 
     this.init(serverOptions);
 
@@ -35,7 +37,7 @@ export default class SpreadTheWord extends EventEmitter {
   }
 
   async listen(options?: ListenerOptions, serverOptions?: ServerOptions) {
-    if (this.status === "Destroyed") return;
+    if (this.status === "destroyed") return;
 
     this.init(serverOptions);
 
@@ -54,8 +56,8 @@ export default class SpreadTheWord extends EventEmitter {
   }
 
   async destroy() {
-    if (this.status === "Destroyed") return;
-    this.status = "Destroyed";
+    if (this.status === "destroyed") return;
+    this.status = "destroyed";
 
     for (const service of this.services) {
       await service.destroy();

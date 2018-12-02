@@ -70,14 +70,12 @@ class RecordRegistry {
     findAddressRecordsByHostname(hostname) {
         return this.find(x => (x.type === "A" || x.type === "AAAA") && x.name === hostname);
     }
-    // tslint:disable-next-line:no-any
     find(filter) {
         this.keepHouse();
         return filter ?
             this.records.filter((record, index) => filter(record, index)) :
             this.records.concat();
     }
-    // tslint:disable-next-line:no-any
     findOne(filter) {
         return this.find().find(filter);
     }

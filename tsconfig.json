@@ -2,16 +2,12 @@
   "compilerOptions": {
     "declaration": true,
     "outDir": "./dist",
-    "noImplicitAny": false,
+    "baseUrl": "./src",
     "moduleResolution": "node",
     "module": "commonjs",
-    "lib": [
-      "es2017"
-    ],
-    "target": "es6"
+    "target": "es2017"
   },
   "include": [
-    "src",
-    "types"
+    "src"
   ]
 }

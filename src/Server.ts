@@ -1,16 +1,12 @@
-import * as multicastdns from "multicast-dns";
-import * as MDNSUtils from "./MDNSUtils";
 import * as debug from "debug";
 import { EventEmitter } from "events";
-import Record from "./Records/Record";
 import RecordRegistry from "./RecordRegistry";
 import Service from "./Service";
-import Listener from "./Listener";
 import Response from "./Response";
 import Query from "./Query";
 import { ServerOptions } from "./Server";
-import Transport, { TransportOptions } from "./Transports/Transport";
-import MDNSTransport from "./Transports/MDNSTransport";
+import Transport, { TransportOptions } from "./transport/Transport";
+import MDNSTransport from "./transport/MDNSTransport";
 import Referrer from "./Referrer";
 import { WILDCARD } from "./Constants";
 
@@ -20,7 +16,6 @@ export interface ServerOptions {
   transportOptions?: TransportOptions;
   transport?: Transport;
   recordRegistry?: RecordRegistry;
-  // tslint:disable-next-line:no-any
   socketOptions?: any;
 }
 

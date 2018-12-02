@@ -1,7 +1,7 @@
 export default class Question {
     name: string;
     type: string;
-    constructor({name, type}?: {
+    constructor({ name, type }?: {
         name?: string;
         type?: string;
     });

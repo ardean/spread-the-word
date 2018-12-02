@@ -1,11 +1,10 @@
 import { assert } from "chai";
 import Server from "../src/Server";
-import Listener from "../src/Listener";
 import Service from "../src/Service";
-import * as MDNSUtils from "../src/MDNSUtils";
 import Response from "../src/Response";
-import Transport from "../src/Transports/Transport";
-import LocalTransport from "../src/Transports/LocalTransport";
+import * as MDNSUtils from "../src/MDNSUtils";
+import Transport from "../src/transport/Transport";
+import LocalTransport from "../src/transport/LocalTransport";
 import { TOP_LEVEL_DOMAIN, WILDCARD } from "../src/Constants";
 
 const type = "jsremote";

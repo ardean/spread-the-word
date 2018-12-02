@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const os = require("os");
+const A_1 = require("./record/A");
+const TXT_1 = require("./record/TXT");
+const SRV_1 = require("./record/SRV");
+const PTR_1 = require("./record/PTR");
+const AAAA_1 = require("./record/AAAA");
 const dnsTxt = require("dns-txt");
-const PTR_1 = require("./Records/PTR");
-const TXT_1 = require("./Records/TXT");
-const SRV_1 = require("./Records/SRV");
-const AAAA_1 = require("./Records/AAAA");
-const A_1 = require("./Records/A");
 function serializeDNSName(options) {
     const subtypes = (options.subtypes || [])
         .filter(x => x)

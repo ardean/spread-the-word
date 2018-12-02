@@ -5,7 +5,7 @@ export default class SRV extends Record {
         target: string;
         port: number;
     };
-    constructor({name, data: {target, port}, ttl}: {
+    constructor({ name, data: { target, port }, ttl }: {
         name: string;
         data: {
             target: string;

@@ -1,7 +1,7 @@
-import SRV from "./Records/SRV";
-import TXT from "./Records/TXT";
+import SRV from "./record/SRV";
+import TXT from "./record/TXT";
 import * as MDNSUtils from "./MDNSUtils";
-import AddressRecord from "./Records/AddressRecord";
+import AddressRecord from "./record/AddressRecord";
 export default class RemoteService {
     name: string;
     type: string;

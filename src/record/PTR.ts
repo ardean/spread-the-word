@@ -1,5 +1,4 @@
 import Record from "./Record";
-import { TOP_LEVEL_DOMAIN } from "../Constants";
 
 export default class PTR extends Record {
   name: string;

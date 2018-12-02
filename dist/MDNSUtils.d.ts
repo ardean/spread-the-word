@@ -1,10 +1,10 @@
 /// <reference types="node" />
-import Record from "./Records/Record";
-import PTR from "./Records/PTR";
-import TXT from "./Records/TXT";
-import SRV from "./Records/SRV";
-import AAAA from "./Records/AAAA";
-import A from "./Records/A";
+import A from "./record/A";
+import TXT from "./record/TXT";
+import SRV from "./record/SRV";
+import PTR from "./record/PTR";
+import AAAA from "./record/AAAA";
+import Record from "./record/Record";
 export interface MDNSNameOptions {
     name?: string;
     subtypes?: string[];
@@ -21,10 +21,10 @@ export declare function getExternalAddresses(): {
 }[];
 export declare function parseRecord(record: any, options?: {
     binaryTXT?: boolean;
-}): PTR | TXT | SRV | AAAA | A;
+}): A | SRV | PTR | AAAA | TXT;
 export declare function serializeRecord(record: any, options?: {
     binaryTXT?: boolean;
-}): PTR | TXT | SRV | AAAA | A;
+}): A | SRV | PTR | AAAA | TXT;
 export interface TXTData {
     [key: string]: string | Buffer;
 }

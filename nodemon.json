@@ -1,0 +1,8 @@
+{
+  "watch": [
+    "src",
+    "demo"
+  ],
+  "ext": "ts",
+  "exec": "cd demo && ts-node ."
+}

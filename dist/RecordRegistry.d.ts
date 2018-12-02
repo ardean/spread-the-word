@@ -1,7 +1,7 @@
-import Record from "./Records/Record";
-import SRV from "./Records/SRV";
-import TXT from "./Records/TXT";
-import AddressRecord from "./Records/AddressRecord";
+import TXT from "./record/TXT";
+import SRV from "./record/SRV";
+import Record from "./record/Record";
+import AddressRecord from "./record/AddressRecord";
 export default class RecordRegistry {
     records: Record[];
     add(record: Record): Record;
@@ -13,7 +13,7 @@ export default class RecordRegistry {
     findOneTXTByName(name: string): TXT;
     findSRVsByType(type: string): SRV[];
     findAddressRecordsByHostname(hostname: string): AddressRecord[];
-    find(filter?: (record: Record, index: number) => any): Record[];
-    findOne(filter: (record: Record, index: number) => any): Record;
+    find(filter?: (record: Record, index: number) => boolean): Record[];
+    findOne(filter: (record: Record, index: number) => boolean): Record;
     keepHouse(): void;
 }

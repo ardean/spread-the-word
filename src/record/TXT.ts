@@ -2,13 +2,15 @@ import Record from "./Record";
 import * as debug from "debug";
 import { parseTXTData, serializeTXTData, TXTData } from "../MDNSUtils";
 
+type DataType = TXTData | Buffer | string;
+
 const debugLog = debug("SpreadTheWord:TXT");
 
 export default class TXT extends Record {
   name: string;
-  data: TXTData | Buffer;
+  data: DataType;
 
-  constructor({ name, data, ttl }: { name: string, data: TXTData | Buffer, ttl?: number }) {
+  constructor({ name, data, ttl }: { name: string, data: DataType, ttl?: number }) {
     super("TXT");
 
     this.name = name;
