@@ -1,8 +1,8 @@
 {
   "watch": [
-    "src",
-    "demo"
+    "demo",
+    "src"
   ],
   "ext": "ts",
-  "exec": "cd demo && ts-node ."
+  "exec": "ts-node demo"
 }

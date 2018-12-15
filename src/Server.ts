@@ -1,14 +1,14 @@
-import * as debug from "debug";
-import { EventEmitter } from "events";
-import RecordRegistry from "./RecordRegistry";
-import Service from "./Service";
-import Response from "./Response";
 import Query from "./Query";
-import { ServerOptions } from "./Server";
-import Transport, { TransportOptions } from "./transports/Transport";
-import MDNSTransport from "./transports/MDNSTransport";
+import * as debug from "debug";
+import Service from "./Service";
 import Referrer from "./Referrer";
+import Response from "./Response";
+import { EventEmitter } from "events";
 import { WILDCARD } from "./Constants";
+import { ServerOptions } from "./Server";
+import RecordRegistry from "./RecordRegistry";
+import MDNSTransport from "./transports/MDNSTransport";
+import Transport, { TransportOptions } from "./transports/Transport";
 
 const debugLog = debug("SpreadTheWord:Server");
 
@@ -110,24 +110,22 @@ export default class Server extends EventEmitter {
   }
 
   async answerQuery(query: Query, referrer: Referrer) {
-    debugLog("answerQuery");
-
     for (const question of query.questions) {
       debugLog("question:", question.name, question.type);
 
-      let askedServices: Service[] = [];
+      let queriedServices: Service[] = [];
       if (question.type === "ANY" || question.name === WILDCARD) {
         debugLog("answer all");
-        askedServices = this.services.concat();
+        queriedServices = this.services.concat();
       } else {
         for (const service of this.services) {
           if (
             question.name === service.dnsName ||
             question.name === service.dnsType
           ) {
-            if (askedServices.indexOf(service) === -1) {
-              debugLog("found asked service", service.dnsName);
-              askedServices.push(service);
+            if (queriedServices.indexOf(service) === -1) {
+              debugLog("found queried service", service.dnsName);
+              queriedServices.push(service);
             }
           }
         }
@@ -135,7 +133,7 @@ export default class Server extends EventEmitter {
 
       let answers = [];
       let additionals = [];
-      for (const service of askedServices) {
+      for (const service of queriedServices) {
         answers = answers.concat(service.getServiceRecords());
         additionals = additionals.concat(service.getAddressRecords());
       }

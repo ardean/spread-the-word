@@ -1,8 +1,10 @@
+import { RecordType } from "./records/Record";
+
 export default class Question {
   name: string;
-  type: string;
+  type: RecordType;
 
-  constructor({ name, type }: { name?: string, type?: string } = {}) {
+  constructor({ name, type }: { name?: string, type?: RecordType } = {}) {
     this.name = name;
     this.type = type;
   }

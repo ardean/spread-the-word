@@ -2,7 +2,7 @@ import { assert } from "chai";
 import Server from "../src/Server";
 import Service from "../src/Service";
 import Response from "../src/Response";
-import * as MDNSUtils from "../src/MDNSUtils";
+import * as MDNSUtil from "../src/MDNSUtil";
 import Transport from "../src/transports/Transport";
 import LocalTransport from "../src/transports/LocalTransport";
 import { TOP_LEVEL_DOMAIN, WILDCARD } from "../src/Constants";
@@ -10,8 +10,8 @@ import { TOP_LEVEL_DOMAIN, WILDCARD } from "../src/Constants";
 const type = "jsremote";
 const name = "remote receiver";
 const port = 4444;
-const dnsType = MDNSUtils.serializeDNSName({ type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
-const dnsName = MDNSUtils.serializeDNSName({ name, type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
+const dnsType = MDNSUtil.serializeDNSName({ type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
+const dnsName = MDNSUtil.serializeDNSName({ name, type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
 
 describe("Service", () => {
   let transport: Transport;

@@ -33,7 +33,7 @@ export function serializeDNSName(options: MDNSNameOptions) {
 
 export function parseDNSName(dnsName: string): MDNSNameOptions {
   let name = "";
-  let domain;
+  let domain = "";
   const parts = dnsName.split(".");
   const prefixed: string[] = [];
   for (let index = 0; index < parts.length; index++) {

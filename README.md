@@ -1,6 +1,6 @@
 # spread-the-word
 
-> A Bonjour / Zeroconf implementation in JavaScript.
+> A Bonjour / Zeroconf implementation in TypeScript.
 
 [![Github Version](https://img.shields.io/github/release/ardean/spread-the-word.svg)](https://github.com/ardean/spread-the-word)
 [![NPM Version](https://img.shields.io/npm/v/spread-the-word.svg)](https://npmjs.org/package/spread-the-word)

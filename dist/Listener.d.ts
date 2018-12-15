@@ -20,8 +20,11 @@ export default class Listener extends EventEmitter {
     wildcard: boolean;
     constructor(server: Server, options?: ListenerOptions);
     listen(): Promise<void>;
-    onResponse: (res: Response, referrer: Referrer) => void;
+    query(): Promise<void>;
+    requery(delay?: number): Promise<void>;
+    onResponse: (res: Response, referrer: Referrer) => Promise<void>;
     destroy(): void;
     addRemoteService(record: SRV, txtRecord: TXT, addressRecords: AddressRecord[], res: Response, referrer: Referrer): void;
     removeRemoteService(name: string, res: Response, referrer: Referrer): void;
+    queryUnresolvedRecords(): Promise<void>;
 }

@@ -1,14 +1,14 @@
 import TXT from "./records/TXT";
 import SRV from "./records/SRV";
 import Record from "./records/Record";
-import * as MDNSUtils from "./MDNSUtils";
+import * as MDNSUtil from "./MDNSUtil";
 import AddressRecord from "./records/AddressRecord";
 
 export default class RecordRegistry {
   records: Record[] = [];
 
   add(record: Record): Record {
-    const cached = this.findOne(x => MDNSUtils.sameRecord(x, record));
+    const cached = this.findOne(x => MDNSUtil.sameRecord(x, record));
     if (!cached) {
       this.records.push(record);
       return record;
@@ -31,7 +31,7 @@ export default class RecordRegistry {
   }
 
   remove(record: Record): Record {
-    const cached = this.findOne(x => MDNSUtils.sameRecord(x, record));
+    const cached = this.findOne(x => MDNSUtil.sameRecord(x, record));
     if (!cached) return;
 
     this.records.splice(this.records.indexOf(cached), 1);
@@ -48,6 +48,11 @@ export default class RecordRegistry {
     }
 
     return removedRecords;
+  }
+
+  findUnresolved() {
+    const pointerRecords = this.find(x => x.type === "PTR");
+    return pointerRecords.filter(x => this.tracePTR(x.data).length === 0);
   }
 
   tracePTR(name: string): Record[] {

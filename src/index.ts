@@ -10,11 +10,11 @@ export { default as SpreadTheWord } from "./SpreadTheWord";
 
 import * as records from "./records";
 import * as transports from "./transports";
-import * as MDNSUtils from "./MDNSUtils";
+import * as MDNSUtil from "./MDNSUtil";
 export {
   records,
   transports,
-  MDNSUtils
+  MDNSUtil
 };
 
 import SpreadTheWord from "./SpreadTheWord";

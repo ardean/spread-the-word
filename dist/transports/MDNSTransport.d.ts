@@ -1,8 +1,8 @@
 /// <reference types="node" />
-import Transport, { TransportOptions } from "./Transport";
 import Query from "../Query";
 import Response from "../Response";
 import { EventEmitter } from "events";
+import Transport, { TransportOptions } from "./Transport";
 export default class MDNSTransport extends EventEmitter implements Transport {
     options: TransportOptions;
     destroyed: boolean;

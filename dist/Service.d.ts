@@ -3,14 +3,14 @@ import Server from "./Server";
 import Response from "./Response";
 import { EventEmitter } from "events";
 import Record from "./records/Record";
-import * as MDNSUtils from "./MDNSUtils";
+import * as MDNSUtil from "./MDNSUtil";
 export interface ServiceOptions {
     name: string;
     type: string;
     port: number;
     protocol?: string;
     subtypes?: string[];
-    txt?: MDNSUtils.TXTData;
+    txt?: MDNSUtil.TXTData;
     hostname?: string;
 }
 export default class Service extends EventEmitter {
@@ -22,7 +22,7 @@ export default class Service extends EventEmitter {
     protocol: string;
     hostname: string;
     port: number;
-    txt: MDNSUtils.TXTData;
+    txt: MDNSUtil.TXTData;
     rawTxt: string;
     subtypes: string[];
     spreaded: boolean;

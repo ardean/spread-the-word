@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import Record from "./Record";
-import { TXTData } from "../MDNSUtils";
+import { TXTData } from "../MDNSUtil";
 declare type DataType = TXTData | Buffer | string;
 export default class TXT extends Record {
     name: string;

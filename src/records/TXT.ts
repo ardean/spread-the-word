@@ -1,6 +1,6 @@
 import Record from "./Record";
 import * as debug from "debug";
-import { parseTXTData, serializeTXTData, TXTData } from "../MDNSUtils";
+import { parseTXTData, serializeTXTData, TXTData } from "../MDNSUtil";
 
 type DataType = TXTData | Buffer | string;
 

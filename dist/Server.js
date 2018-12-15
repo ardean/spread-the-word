@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const debug = require("debug");
-const events_1 = require("events");
-const RecordRegistry_1 = require("./RecordRegistry");
 const Response_1 = require("./Response");
-const MDNSTransport_1 = require("./transports/MDNSTransport");
+const events_1 = require("events");
 const Constants_1 = require("./Constants");
+const RecordRegistry_1 = require("./RecordRegistry");
+const MDNSTransport_1 = require("./transports/MDNSTransport");
 const debugLog = debug("SpreadTheWord:Server");
 class Server extends events_1.EventEmitter {
     constructor(options = {}) {
@@ -81,28 +81,27 @@ class Server extends events_1.EventEmitter {
         });
     }
     async answerQuery(query, referrer) {
-        debugLog("answerQuery");
         for (const question of query.questions) {
             debugLog("question:", question.name, question.type);
-            let askedServices = [];
+            let queriedServices = [];
             if (question.type === "ANY" || question.name === Constants_1.WILDCARD) {
                 debugLog("answer all");
-                askedServices = this.services.concat();
+                queriedServices = this.services.concat();
             }
             else {
                 for (const service of this.services) {
                     if (question.name === service.dnsName ||
                         question.name === service.dnsType) {
-                        if (askedServices.indexOf(service) === -1) {
-                            debugLog("found asked service", service.dnsName);
-                            askedServices.push(service);
+                        if (queriedServices.indexOf(service) === -1) {
+                            debugLog("found queried service", service.dnsName);
+                            queriedServices.push(service);
                         }
                     }
                 }
             }
             let answers = [];
             let additionals = [];
-            for (const service of askedServices) {
+            for (const service of queriedServices) {
                 answers = answers.concat(service.getServiceRecords());
                 additionals = additionals.concat(service.getAddressRecords());
             }

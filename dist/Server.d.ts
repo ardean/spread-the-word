@@ -1,12 +1,12 @@
 /// <reference types="node" />
-import { EventEmitter } from "events";
-import RecordRegistry from "./RecordRegistry";
-import Service from "./Service";
-import Response from "./Response";
 import Query from "./Query";
-import { ServerOptions } from "./Server";
-import Transport, { TransportOptions } from "./transports/Transport";
+import Service from "./Service";
 import Referrer from "./Referrer";
+import Response from "./Response";
+import { EventEmitter } from "events";
+import { ServerOptions } from "./Server";
+import RecordRegistry from "./RecordRegistry";
+import Transport, { TransportOptions } from "./transports/Transport";
 export interface ServerOptions {
     transportOptions?: TransportOptions;
     transport?: Transport;

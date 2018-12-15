@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const MDNSUtils = require("./MDNSUtils");
+const MDNSUtil = require("./MDNSUtil");
 class Response {
     constructor(options = {}) {
         this.additionals = [];
@@ -9,20 +9,20 @@ class Response {
     }
     static parse(options, parseOptions) {
         const answers = (options.answers || [])
-            .map(x => MDNSUtils.parseRecord(x, parseOptions))
+            .map(x => MDNSUtil.parseRecord(x, parseOptions))
             .filter(x => x);
         const additionals = (options.additionals || [])
-            .map(x => MDNSUtils.parseRecord(x, parseOptions))
+            .map(x => MDNSUtil.parseRecord(x, parseOptions))
             .filter(x => x);
         return new Response(Object.assign({}, options, { answers,
             additionals }));
     }
     static serialize(options, serializeOptions) {
         const answers = (options.answers || [])
-            .map(x => MDNSUtils.serializeRecord(x, serializeOptions))
+            .map(x => MDNSUtil.serializeRecord(x, serializeOptions))
             .filter(x => x);
         const additionals = (options.additionals || [])
-            .map(x => MDNSUtils.serializeRecord(x, serializeOptions))
+            .map(x => MDNSUtil.serializeRecord(x, serializeOptions))
             .filter(x => x);
         return new Response(Object.assign({}, options, { answers,
             additionals }));

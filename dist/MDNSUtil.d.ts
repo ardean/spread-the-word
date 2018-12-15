@@ -21,10 +21,10 @@ export declare function getExternalAddresses(): {
 }[];
 export declare function parseRecord(record: any, options?: {
     binaryTXT?: boolean;
-}): A | SRV | PTR | AAAA | TXT;
+}): A | TXT | SRV | PTR | AAAA;
 export declare function serializeRecord(record: any, options?: {
     binaryTXT?: boolean;
-}): A | SRV | PTR | AAAA | TXT;
+}): A | TXT | SRV | PTR | AAAA;
 export interface TXTData {
     [key: string]: string | Buffer;
 }

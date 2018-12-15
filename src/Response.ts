@@ -1,5 +1,5 @@
 import Record from "./records/Record";
-import * as MDNSUtils from "./MDNSUtils";
+import * as MDNSUtil from "./MDNSUtil";
 
 export interface ResponseOptions {
   answers?: Record[];
@@ -17,10 +17,10 @@ export default class Response {
 
   static parse(options: ResponseOptions, parseOptions?): Response {
     const answers = (options.answers || [])
-      .map(x => MDNSUtils.parseRecord(x, parseOptions))
+      .map(x => MDNSUtil.parseRecord(x, parseOptions))
       .filter(x => x);
     const additionals = (options.additionals || [])
-      .map(x => MDNSUtils.parseRecord(x, parseOptions))
+      .map(x => MDNSUtil.parseRecord(x, parseOptions))
       .filter(x => x);
 
     return new Response({
@@ -32,10 +32,10 @@ export default class Response {
 
   static serialize(options: ResponseOptions, serializeOptions?): Response {
     const answers = (options.answers || [])
-      .map(x => MDNSUtils.serializeRecord(x, serializeOptions))
+      .map(x => MDNSUtil.serializeRecord(x, serializeOptions))
       .filter(x => x);
     const additionals = (options.additionals || [])
-      .map(x => MDNSUtils.serializeRecord(x, serializeOptions))
+      .map(x => MDNSUtil.serializeRecord(x, serializeOptions))
       .filter(x => x);
 
     return new Response({

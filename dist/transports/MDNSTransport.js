@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const multicastdns = require("multicast-dns");
 const Query_1 = require("../Query");
 const Referrer_1 = require("../Referrer");
 const Response_1 = require("../Response");
 const events_1 = require("events");
-const MDNSUtils = require("../MDNSUtils");
+const MDNSUtil = require("../MDNSUtil");
+const multicastdns = require("multicast-dns");
 class MDNSTransport extends events_1.EventEmitter {
     constructor(options = {}) {
         super();
@@ -55,7 +55,7 @@ class MDNSTransport extends events_1.EventEmitter {
         });
     }
     getAddresses() {
-        return MDNSUtils.getExternalAddresses();
+        return MDNSUtil.getExternalAddresses();
     }
 }
 exports.default = MDNSTransport;

@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const MDNSUtils = require("./MDNSUtils");
+const MDNSUtil = require("./MDNSUtil");
 class RecordRegistry {
     constructor() {
         this.records = [];
     }
     add(record) {
-        const cached = this.findOne(x => MDNSUtils.sameRecord(x, record));
+        const cached = this.findOne(x => MDNSUtil.sameRecord(x, record));
         if (!cached) {
             this.records.push(record);
             return record;
@@ -24,7 +24,7 @@ class RecordRegistry {
         return addedRecords;
     }
     remove(record) {
-        const cached = this.findOne(x => MDNSUtils.sameRecord(x, record));
+        const cached = this.findOne(x => MDNSUtil.sameRecord(x, record));
         if (!cached)
             return;
         this.records.splice(this.records.indexOf(cached), 1);
@@ -39,6 +39,10 @@ class RecordRegistry {
                 removedRecords.push(removedRecord);
         }
         return removedRecords;
+    }
+    findUnresolved() {
+        const pointerRecords = this.find(x => x.type === "PTR");
+        return pointerRecords.filter(x => this.tracePTR(x.data).length === 0);
     }
     tracePTR(name) {
         const records = this.records.filter(x => x.name === name);

@@ -5,11 +5,12 @@ import SRV from "./records/SRV";
 import TXT from "./records/TXT";
 import Response from "./Response";
 import Referrer from "./Referrer";
+import Question from "./Question";
 import { EventEmitter } from "events";
-import * as MDNSUtils from "./MDNSUtils";
+import * as MDNSUtil from "./MDNSUtil";
 import RemoteService from "./RemoteService";
 import AddressRecord from "./records/AddressRecord";
-import { TOP_LEVEL_DOMAIN, WILDCARD } from "./Constants";
+import { TOP_LEVEL_DOMAIN, WILDCARD, REQUERY_FACTOR, REQUERY_MAX_MS } from "./Constants";
 
 const debugLog = debug("SpreadTheWord:Listener");
 
@@ -33,20 +34,23 @@ export default class Listener extends EventEmitter {
     this.wildcard = !options.type;
 
     if (!this.wildcard) {
-      this.typeName = MDNSUtils.serializeDNSName({
+      this.typeName = MDNSUtil.serializeDNSName({
         name: options.name,
         subtypes: options.subtypes,
         type: options.type,
         protocol: options.protocol || "tcp",
         domain: TOP_LEVEL_DOMAIN
       });
-      this.wildcard = false;
     }
   }
 
   async listen() {
     this.server.on("response", this.onResponse);
 
+    await this.requery();
+  }
+
+  async query() {
     const query = new Query({
       questions: [{
         name: this.typeName || WILDCARD,
@@ -57,11 +61,22 @@ export default class Listener extends EventEmitter {
     await this.server.transport.query(query);
   }
 
-  onResponse = (res: Response, referrer: Referrer) => {
+  async requery(delay: number = 1000) {
+    await this.query();
+
+    delay = Math.min(delay * REQUERY_FACTOR, REQUERY_MAX_MS);
+    setTimeout(async () => await this.requery(delay), delay);
+  }
+
+  onResponse = async (res: Response, referrer: Referrer) => {
     const srvRecords = this.server.recordRegistry.findSRVsByType(this.typeName || WILDCARD);
     for (const srvRecord of srvRecords) {
-      const name = MDNSUtils.parseDNSName(srvRecord.name).name;
-      const remoteService = this.remoteServices.find(x => x.name === name);
+      const port = srvRecord.data.port;
+      const name = MDNSUtil.parseDNSName(srvRecord.name).name;
+      const remoteService = this.remoteServices.find(x =>
+        x.name === name &&
+        x.port === port
+      );
       if (!remoteService) {
         const addressRecords = this.server.recordRegistry.findAddressRecordsByHostname(srvRecord.data.target);
         const txtRecord = this.server.recordRegistry.findOneTXTByName(srvRecord.name);
@@ -70,11 +85,16 @@ export default class Listener extends EventEmitter {
     }
 
     for (const remoteService of this.remoteServices) {
-      const srvRecord = srvRecords.find(x => {
-        return MDNSUtils.parseDNSName(x.name).name === remoteService.name;
-      });
+      const port = remoteService.port;
+      const name = remoteService.name;
+      const srvRecord = srvRecords.find(x =>
+        MDNSUtil.parseDNSName(x.name).name === name &&
+        x.data.port === port
+      );
       if (!srvRecord) this.removeRemoteService(remoteService.name, res, referrer);
     }
+
+    await this.queryUnresolvedRecords();
   }
 
   destroy() {
@@ -97,5 +117,22 @@ export default class Listener extends EventEmitter {
 
     debugLog("down", remoteService.name, remoteService.hostname, remoteService.port);
     this.emit("down", remoteService, res, referrer);
+  }
+
+  async queryUnresolvedRecords() {
+    const unresolvedRecords = this.server.recordRegistry.findUnresolved();
+    const questions: Question[] = [];
+
+    for (const unresolvedRecord of unresolvedRecords) {
+      debugLog("querying unresolved record", unresolvedRecord.data);
+
+      questions.push({
+        name: unresolvedRecord.data,
+        type: "ANY"
+      });
+    }
+
+    const query = new Query({ questions });
+    await this.server.transport.query(query);
   }
 }

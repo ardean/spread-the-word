@@ -5,7 +5,7 @@ const Query_1 = require("./Query");
 const debug = require("debug");
 const Response_1 = require("./Response");
 const events_1 = require("events");
-const MDNSUtils = require("./MDNSUtils");
+const MDNSUtil = require("./MDNSUtil");
 const records_1 = require("./records");
 const Constants_1 = require("./Constants");
 const debugLog = debug("SpreadTheWord:Service");
@@ -24,13 +24,13 @@ class Service extends events_1.EventEmitter {
         this.port = options.port;
         this.txt = options.txt;
         this.hostname = options.hostname || os.hostname() + "." + Constants_1.TOP_LEVEL_DOMAIN;
-        this.dnsType = MDNSUtils.serializeDNSName({
+        this.dnsType = MDNSUtil.serializeDNSName({
             subtypes: this.subtypes,
             type: this.type,
             protocol: this.protocol,
             domain: Constants_1.TOP_LEVEL_DOMAIN
         });
-        this.dnsName = MDNSUtils.serializeDNSName({
+        this.dnsName = MDNSUtil.serializeDNSName({
             name: this.name,
             subtypes: this.subtypes,
             type: this.type,

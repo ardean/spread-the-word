@@ -10,21 +10,18 @@ stw.init({
 
 stw
   .on("up", (remoteService: RemoteService, res: Response, referrer: Referrer) => {
-    console.log(`${remoteService.name} is up (from ${referrer.address})`);
-    if (remoteService.txt) console.log("TXT found:", remoteService.txt.message);
+    console.log(`${remoteService.name} (type: ${remoteService.type}, port: ${remoteService.port}) is up (from ${referrer.address})`);
+    if (remoteService.txt) console.log("TXT found:", remoteService.txt);
   })
   .on("down", (remoteService: RemoteService, res: Response, referrer: Referrer) => {
-    console.log(`${remoteService.name} is down (from ${referrer.address})`);
-    if (remoteService.txt) console.log("TXT found:", remoteService.txt.message);
+    console.log(`${remoteService.name} (type: ${remoteService.type}, port: ${remoteService.port}) is down (from ${referrer.address})`);
   });
 
-stw.listen({
-  type: "jsremote"
-});
+stw.listen();
 
 spreadLoop(0);
 
-async function spreadLoop(index) {
+async function spreadLoop(index: number) {
   const service = await stw.spread({
     name: "remote receiver",
     port: 4444,

@@ -25,7 +25,7 @@ function serializeDNSName(options) {
 exports.serializeDNSName = serializeDNSName;
 function parseDNSName(dnsName) {
     let name = "";
-    let domain;
+    let domain = "";
     const parts = dnsName.split(".");
     const prefixed = [];
     for (let index = 0; index < parts.length; index++) {

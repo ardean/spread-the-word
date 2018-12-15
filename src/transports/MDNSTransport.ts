@@ -1,15 +1,14 @@
-import * as multicastdns from "multicast-dns";
-import Transport, { TransportOptions } from "./Transport";
 import Query from "../Query";
 import Referrer from "../Referrer";
 import Response from "../Response";
 import { EventEmitter } from "events";
-import * as MDNSUtils from "../MDNSUtils";
+import * as MDNSUtil from "../MDNSUtil";
+import * as multicastdns from "multicast-dns";
+import Transport, { TransportOptions } from "./Transport";
 
 export default class MDNSTransport extends EventEmitter implements Transport {
   options: TransportOptions;
   destroyed: boolean = false;
-  // tslint:disable-next-line:no-any
   mdns: any;
 
   constructor(options: TransportOptions = {}) {
@@ -64,6 +63,6 @@ export default class MDNSTransport extends EventEmitter implements Transport {
   }
 
   getAddresses(): Array<{ family: string, address: string }> {
-    return MDNSUtils.getExternalAddresses();
+    return MDNSUtil.getExternalAddresses();
   }
 }

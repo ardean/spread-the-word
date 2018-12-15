@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const MDNSUtils = require("./MDNSUtils");
+const MDNSUtil = require("./MDNSUtil");
 class RemoteService {
     constructor(record, txtRecord, addressRecords = []) {
-        const { name, type, subtypes, protocol, domain } = MDNSUtils.parseDNSName(record.name);
+        const { name, type, subtypes, protocol, domain } = MDNSUtil.parseDNSName(record.name);
         this.name = name;
         this.type = type;
         this.subtypes = subtypes;

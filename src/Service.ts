@@ -5,7 +5,7 @@ import * as debug from "debug";
 import Response from "./Response";
 import { EventEmitter } from "events";
 import Record from "./records/Record";
-import * as MDNSUtils from "./MDNSUtils";
+import * as MDNSUtil from "./MDNSUtil";
 import { A, AAAA, PTR, TXT, SRV } from "./records";
 import { TOP_LEVEL_DOMAIN, REANNOUNCE_FACTOR, REANNOUNCE_MAX_MS, WILDCARD } from "./Constants";
 
@@ -17,7 +17,7 @@ export interface ServiceOptions {
   port: number;
   protocol?: string;
   subtypes?: string[];
-  txt?: MDNSUtils.TXTData;
+  txt?: MDNSUtil.TXTData;
   hostname?: string;
 }
 
@@ -30,7 +30,7 @@ export default class Service extends EventEmitter {
   protocol: string;
   hostname: string;
   port: number;
-  txt: MDNSUtils.TXTData;
+  txt: MDNSUtil.TXTData;
   rawTxt: string;
   subtypes: string[] = [];
   spreaded: boolean = false;
@@ -49,13 +49,13 @@ export default class Service extends EventEmitter {
     this.port = options.port;
     this.txt = options.txt;
     this.hostname = options.hostname || os.hostname() + "." + TOP_LEVEL_DOMAIN;
-    this.dnsType = MDNSUtils.serializeDNSName({
+    this.dnsType = MDNSUtil.serializeDNSName({
       subtypes: this.subtypes,
       type: this.type,
       protocol: this.protocol,
       domain: TOP_LEVEL_DOMAIN
     });
-    this.dnsName = MDNSUtils.serializeDNSName({
+    this.dnsName = MDNSUtil.serializeDNSName({
       name: this.name,
       subtypes: this.subtypes,
       type: this.type,

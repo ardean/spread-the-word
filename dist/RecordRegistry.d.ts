@@ -8,6 +8,7 @@ export default class RecordRegistry {
     addAll(records: Record[]): any[];
     remove(record: Record): Record;
     removeAll(records?: Record[]): Record[];
+    findUnresolved(): Record[];
     tracePTR(name: string): Record[];
     findOneSRVByName(name: string): SRV;
     findOneTXTByName(name: string): TXT;

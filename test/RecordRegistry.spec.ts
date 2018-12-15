@@ -5,7 +5,7 @@ import TXT from "../src/records/TXT";
 import PTR from "../src/records/PTR";
 import AAAA from "../src/records/AAAA";
 import { WILDCARD } from "../src/Constants";
-import { sameRecord } from "../src/MDNSUtils";
+import { sameRecord } from "../src/MDNSUtil";
 import RecordRegistry from "../src/RecordRegistry";
 
 const typeName = "_jsremote._tcp.local";
