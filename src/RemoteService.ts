@@ -25,6 +25,6 @@ export default class RemoteService {
     this.hostname = record.data.target;
     this.port = record.data.port;
     this.addresses = addressRecords.map(x => x.data);
-    this.txt = txtRecord.data as MDNSUtil.TXTData;
+    this.txt = txtRecord ? txtRecord.data as MDNSUtil.TXTData : null;
   }
 }

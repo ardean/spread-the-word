@@ -12,7 +12,7 @@ class RemoteService {
         this.hostname = record.data.target;
         this.port = record.data.port;
         this.addresses = addressRecords.map(x => x.data);
-        this.txt = txtRecord.data;
+        this.txt = txtRecord ? txtRecord.data : null;
     }
 }
 exports.default = RemoteService;
