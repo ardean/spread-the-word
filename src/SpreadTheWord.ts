@@ -10,7 +10,8 @@ export type StatusType = "uninitialized" | "spreaded" | "destroyed";
 
 export default class SpreadTheWord extends EventEmitter {
   server: Server;
-  services: Service[] = [];
+  servicesList: Service[] = [];
+  listenersList: Listener[] = [];
   status: StatusType = "uninitialized";
 
   init(options?: ServerOptions) {
@@ -27,11 +28,11 @@ export default class SpreadTheWord extends EventEmitter {
 
     const service = new Service(this.server, options);
     service.once("destroy", () => {
-      this.services.splice(this.services.indexOf(service), 1);
+      this.servicesList.splice(this.servicesList.indexOf(service), 1);
     });
     await service.spread();
 
-    this.services.push(service);
+    this.servicesList.push(service);
 
     return service;
   }
@@ -48,9 +49,14 @@ export default class SpreadTheWord extends EventEmitter {
       )
       .on("down", (remoteService: RemoteService, res: Response, referrer: Referrer) =>
         this.emit("down", remoteService, res, referrer)
-      );
+      )
+      .once("destroy", () => {
+        this.listenersList.splice(this.listenersList.indexOf(listener), 1);
+      });
 
     await listener.listen();
+
+    this.listenersList.push(listener);
 
     return listener;
   }
@@ -59,8 +65,12 @@ export default class SpreadTheWord extends EventEmitter {
     if (this.status === "destroyed") return;
     this.status = "destroyed";
 
-    for (const service of this.services) {
+    for (const service of this.servicesList) {
       await service.destroy();
+    }
+
+    for (const listener of this.listenersList) {
+      await listener.destroy();
     }
 
     if (this.server) await this.server.destroy();

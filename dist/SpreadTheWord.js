@@ -7,7 +7,8 @@ const Listener_1 = require("./Listener");
 class SpreadTheWord extends events_1.EventEmitter {
     constructor() {
         super(...arguments);
-        this.services = [];
+        this.servicesList = [];
+        this.listenersList = [];
         this.status = "uninitialized";
     }
     init(options) {
@@ -22,10 +23,10 @@ class SpreadTheWord extends events_1.EventEmitter {
         this.init(serverOptions);
         const service = new Service_1.default(this.server, options);
         service.once("destroy", () => {
-            this.services.splice(this.services.indexOf(service), 1);
+            this.servicesList.splice(this.servicesList.indexOf(service), 1);
         });
         await service.spread();
-        this.services.push(service);
+        this.servicesList.push(service);
         return service;
     }
     async listen(options, serverOptions) {
@@ -35,16 +36,23 @@ class SpreadTheWord extends events_1.EventEmitter {
         const listener = new Listener_1.default(this.server, options);
         listener
             .on("up", (remoteService, res, referrer) => this.emit("up", remoteService, res, referrer))
-            .on("down", (remoteService, res, referrer) => this.emit("down", remoteService, res, referrer));
+            .on("down", (remoteService, res, referrer) => this.emit("down", remoteService, res, referrer))
+            .once("destroy", () => {
+            this.listenersList.splice(this.listenersList.indexOf(listener), 1);
+        });
         await listener.listen();
+        this.listenersList.push(listener);
         return listener;
     }
     async destroy() {
         if (this.status === "destroyed")
             return;
         this.status = "destroyed";
-        for (const service of this.services) {
+        for (const service of this.servicesList) {
             await service.destroy();
+        }
+        for (const listener of this.listenersList) {
+            await listener.destroy();
         }
         if (this.server)
             await this.server.destroy();

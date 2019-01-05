@@ -26,6 +26,7 @@ export default class Listener extends EventEmitter {
   remoteServices: RemoteService[] = [];
   typeName: string;
   wildcard: boolean;
+  requeryDelay: NodeJS.Timer;
 
   constructor(server: Server, options: ListenerOptions = {}) {
     super();
@@ -65,7 +66,7 @@ export default class Listener extends EventEmitter {
     await this.query();
 
     delay = Math.min(delay * REQUERY_FACTOR, REQUERY_MAX_MS);
-    setTimeout(async () => await this.requery(delay), delay);
+    this.requeryDelay = setTimeout(async () => await this.requery(delay), delay);
   }
 
   onResponse = async (res: Response, referrer: Referrer) => {
@@ -98,7 +99,9 @@ export default class Listener extends EventEmitter {
   }
 
   destroy() {
+    clearTimeout(this.requeryDelay);
     this.server.removeListener("response", this.onResponse);
+    this.emit("destroy");
   }
 
   addRemoteService(record: SRV, txtRecord: TXT, addressRecords: AddressRecord[], res: Response, referrer: Referrer) {
