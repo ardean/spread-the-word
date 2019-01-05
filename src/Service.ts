@@ -35,6 +35,7 @@ export default class Service extends EventEmitter {
   subtypes: string[] = [];
   spreaded: boolean = false;
   destroyed: boolean = false;
+  broadcastDelay: NodeJS.Timer;
 
   constructor(server: Server, options: ServiceOptions) {
     super();
@@ -130,10 +131,11 @@ export default class Service extends EventEmitter {
     this.spreaded = true;
 
     delay = Math.min(delay * REANNOUNCE_FACTOR, REANNOUNCE_MAX_MS);
-    setTimeout(async () => await this.broadcast(res, delay), delay);
+    this.broadcastDelay = setTimeout(async () => await this.broadcast(res, delay), delay);
   }
 
   async hide() {
+    clearTimeout(this.broadcastDelay);
     await this.sendGoodbye();
     await new Promise(resolve => setTimeout(() => resolve(), 100));
 

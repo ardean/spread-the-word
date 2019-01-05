@@ -88,9 +88,10 @@ class Service extends events_1.EventEmitter {
         }
         this.spreaded = true;
         delay = Math.min(delay * Constants_1.REANNOUNCE_FACTOR, Constants_1.REANNOUNCE_MAX_MS);
-        setTimeout(async () => await this.broadcast(res, delay), delay);
+        this.broadcastDelay = setTimeout(async () => await this.broadcast(res, delay), delay);
     }
     async hide() {
+        clearTimeout(this.broadcastDelay);
         await this.sendGoodbye();
         await new Promise(resolve => setTimeout(() => resolve(), 100));
         this.spreaded = false;

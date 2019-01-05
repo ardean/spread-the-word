@@ -27,6 +27,7 @@ export default class Service extends EventEmitter {
     subtypes: string[];
     spreaded: boolean;
     destroyed: boolean;
+    broadcastDelay: NodeJS.Timer;
     constructor(server: Server, options: ServiceOptions);
     spread(options?: {
         probe?: boolean;
