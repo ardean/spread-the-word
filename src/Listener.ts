@@ -101,6 +101,7 @@ export default class Listener extends EventEmitter {
   destroy() {
     clearTimeout(this.requeryDelay);
     this.server.removeListener("response", this.onResponse);
+    this.emit("destroy");
   }
 
   addRemoteService(record: SRV, txtRecord: TXT, addressRecords: AddressRecord[], res: Response, referrer: Referrer) {
