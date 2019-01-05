@@ -62,9 +62,10 @@ class Listener extends events_1.EventEmitter {
     async requery(delay = 1000) {
         await this.query();
         delay = Math.min(delay * Constants_1.REQUERY_FACTOR, Constants_1.REQUERY_MAX_MS);
-        setTimeout(async () => await this.requery(delay), delay);
+        this.requeryDelay = setTimeout(async () => await this.requery(delay), delay);
     }
     destroy() {
+        clearTimeout(this.requeryDelay);
         this.server.removeListener("response", this.onResponse);
     }
     addRemoteService(record, txtRecord, addressRecords, res, referrer) {

@@ -18,6 +18,7 @@ export default class Listener extends EventEmitter {
     remoteServices: RemoteService[];
     typeName: string;
     wildcard: boolean;
+    requeryDelay: NodeJS.Timer;
     constructor(server: Server, options?: ListenerOptions);
     listen(): Promise<void>;
     query(): Promise<void>;

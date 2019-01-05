@@ -6,7 +6,8 @@ import Listener, { ListenerOptions } from "./Listener";
 export declare type StatusType = "uninitialized" | "spreaded" | "destroyed";
 export default class SpreadTheWord extends EventEmitter {
     server: Server;
-    services: Service[];
+    servicesList: Service[];
+    listenersList: Listener[];
     status: StatusType;
     init(options?: ServerOptions): void;
     spread(options: ServiceOptions, serverOptions?: ServerOptions): Promise<Service>;
