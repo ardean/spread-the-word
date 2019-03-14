@@ -6,6 +6,7 @@
 [![NPM Version](https://img.shields.io/npm/v/spread-the-word.svg)](https://npmjs.org/package/spread-the-word)
 [![NPM Downloads](https://img.shields.io/npm/dm/spread-the-word.svg)](https://npmjs.org/package/spread-the-word)
 [![License](https://img.shields.io/npm/l/spread-the-word.svg)](LICENSE.md)
+[![CircleCI](https://circleci.com/gh/ardean/spread-the-word.svg?style=svg)](https://circleci.com/gh/ardean/spread-the-word)
 
 *Spread services across your local network and discover other services*
 
