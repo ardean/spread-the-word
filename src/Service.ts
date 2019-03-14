@@ -1,7 +1,7 @@
-import * as os from "os";
+import os from "os";
+import debug from "debug";
 import Query from "./Query";
 import Server from "./Server";
-import * as debug from "debug";
 import Response from "./Response";
 import { EventEmitter } from "events";
 import Record from "./records/Record";

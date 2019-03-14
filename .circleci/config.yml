@@ -1,0 +1,89 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/ardean/spread-the-word
+  docker:
+    - image: circleci/node:10.15.1
+
+jobs:
+  build:
+    <<: *defaults 
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Run linter
+          command: npm run lint
+      - run:
+          name: Run build
+          command: npm run build
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - ardean
+
+  deploy:
+    <<: *defaults 
+    steps:
+      - attach_workspace:
+          at: ~/
+      - deploy:
+          name: Run tests
+          command: npm run test
+
+  deploy:
+    <<: *defaults 
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Source $VERSION from package.json
+          command: echo "export VERSION=$(echo "var p=require('./package.json');console.log(p.version);" | node)" >> $BASH_ENV
+      - run:
+          name: Deploy docs to github
+          command: |
+            git config user.email "$GITHUB_EMAIL"
+            git config user.name "$GITHUB_USERNAME"
+            git add ./docs/*
+            git commit -m "Publish docs v$VERSION"
+            git push -q https://${GITHUB_TOKEN}@github.com/ardean/spread-the-word.git master
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ./.npmrc
+      - deploy:
+          name: npm publish
+          command: |
+            if [ -z "$(npm info $(npm ls --depth=-1 2>/dev/null | head -1 | cut -f 1 -d " ") 2>/dev/null)" ] ; then
+              npm publish
+            fi
+
+workflows:
+  version: 2
+  build_deploy:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /.*/
+      - test:
+          requires:
+            - build
+          filters:
+            tags:
+              only: /.*/
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master

@@ -1,12 +1,22 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Query_1 = require("./Query");
-const debug = require("debug");
+const debug_1 = __importDefault(require("debug"));
+const Query_1 = __importDefault(require("./Query"));
 const events_1 = require("events");
-const MDNSUtil = require("./MDNSUtil");
-const RemoteService_1 = require("./RemoteService");
+const MDNSUtil = __importStar(require("./MDNSUtil"));
+const RemoteService_1 = __importDefault(require("./RemoteService"));
 const Constants_1 = require("./Constants");
-const debugLog = debug("SpreadTheWord:Listener");
+const debugLog = debug_1.default("SpreadTheWord:Listener");
 class Listener extends events_1.EventEmitter {
     constructor(server, options = {}) {
         super();

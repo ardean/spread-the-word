@@ -3,7 +3,7 @@ import Referrer from "../Referrer";
 import Response from "../Response";
 import { EventEmitter } from "events";
 import * as MDNSUtil from "../MDNSUtil";
-import * as multicastdns from "multicast-dns";
+import multicastdns from "multicast-dns";
 import Transport, { TransportOptions } from "./Transport";
 
 export default class MDNSTransport extends EventEmitter implements Transport {

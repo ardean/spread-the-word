@@ -1,9 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Query_1 = require("../Query");
-const Response_1 = require("../Response");
+const Query_1 = __importDefault(require("../Query"));
+const Response_1 = __importDefault(require("../Response"));
 const events_1 = require("events");
-const Referrer_1 = require("../Referrer");
+const Referrer_1 = __importDefault(require("../Referrer"));
 class LocalTransport extends events_1.EventEmitter {
     constructor(options) {
         super();

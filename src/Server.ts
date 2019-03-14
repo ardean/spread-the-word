@@ -1,5 +1,5 @@
+import debug from "debug";
 import Query from "./Query";
-import * as debug from "debug";
 import Service from "./Service";
 import Referrer from "./Referrer";
 import Response from "./Response";

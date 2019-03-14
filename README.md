@@ -13,10 +13,6 @@
 ```sh
 $ npm i spread-the-word
 ```
-or
-```sh
-$ yarn add spread-the-word
-```
 
 ## Usage
 ```js
@@ -59,7 +55,7 @@ You can find the latest version of documentation hosted [here](https://ardean.gi
 ## Debug
 
 ```sh
-$ DEBUG=SpreadTheWord:* yarn start
+$ DEBUG=SpreadTheWord:* npm start
 ```
 
 ## License

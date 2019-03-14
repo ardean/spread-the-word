@@ -1,14 +1,24 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const os = require("os");
-const Query_1 = require("./Query");
-const debug = require("debug");
-const Response_1 = require("./Response");
+const os_1 = __importDefault(require("os"));
+const debug_1 = __importDefault(require("debug"));
+const Query_1 = __importDefault(require("./Query"));
+const Response_1 = __importDefault(require("./Response"));
 const events_1 = require("events");
-const MDNSUtil = require("./MDNSUtil");
+const MDNSUtil = __importStar(require("./MDNSUtil"));
 const records_1 = require("./records");
 const Constants_1 = require("./Constants");
-const debugLog = debug("SpreadTheWord:Service");
+const debugLog = debug_1.default("SpreadTheWord:Service");
 class Service extends events_1.EventEmitter {
     constructor(server, options) {
         super();
@@ -23,7 +33,7 @@ class Service extends events_1.EventEmitter {
         this.subtypes = options.subtypes || [];
         this.port = options.port;
         this.txt = options.txt;
-        this.hostname = options.hostname || os.hostname() + "." + Constants_1.TOP_LEVEL_DOMAIN;
+        this.hostname = options.hostname || os_1.default.hostname() + "." + Constants_1.TOP_LEVEL_DOMAIN;
         this.dnsType = MDNSUtil.serializeDNSName({
             subtypes: this.subtypes,
             type: this.type,

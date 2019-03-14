@@ -1,12 +1,15 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const os = require("os");
-const A_1 = require("./records/A");
-const TXT_1 = require("./records/TXT");
-const SRV_1 = require("./records/SRV");
-const PTR_1 = require("./records/PTR");
-const AAAA_1 = require("./records/AAAA");
-const dnsTxt = require("dns-txt");
+const os_1 = __importDefault(require("os"));
+const A_1 = __importDefault(require("./records/A"));
+const dns_txt_1 = __importDefault(require("dns-txt"));
+const TXT_1 = __importDefault(require("./records/TXT"));
+const SRV_1 = __importDefault(require("./records/SRV"));
+const PTR_1 = __importDefault(require("./records/PTR"));
+const AAAA_1 = __importDefault(require("./records/AAAA"));
 function serializeDNSName(options) {
     const subtypes = (options.subtypes || [])
         .filter(x => x)
@@ -65,7 +68,7 @@ function sameRecord(a, b) {
 }
 exports.sameRecord = sameRecord;
 function getExternalAddresses() {
-    const interfaceMap = os.networkInterfaces();
+    const interfaceMap = os_1.default.networkInterfaces();
     const interfaceNames = Object.keys(interfaceMap);
     const addresses = [];
     for (const interfaceName of interfaceNames) {
@@ -111,11 +114,11 @@ function serializeRecord(record, options = {}) {
 }
 exports.serializeRecord = serializeRecord;
 function parseTXTData(data, options = { binary: false }) {
-    const result = dnsTxt({ binary: options.binary }).decode(data);
+    const result = dns_txt_1.default({ binary: options.binary }).decode(data);
     return Object.keys(result).length > 0 ? result : null;
 }
 exports.parseTXTData = parseTXTData;
 function serializeTXTData(data, options = { binary: false }) {
-    return dnsTxt({ binary: options.binary }).encode(data);
+    return dns_txt_1.default({ binary: options.binary }).encode(data);
 }
 exports.serializeTXTData = serializeTXTData;

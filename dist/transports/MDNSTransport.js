@@ -1,17 +1,27 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Query_1 = require("../Query");
-const Referrer_1 = require("../Referrer");
-const Response_1 = require("../Response");
+const Query_1 = __importDefault(require("../Query"));
+const Referrer_1 = __importDefault(require("../Referrer"));
+const Response_1 = __importDefault(require("../Response"));
 const events_1 = require("events");
-const MDNSUtil = require("../MDNSUtil");
-const multicastdns = require("multicast-dns");
+const MDNSUtil = __importStar(require("../MDNSUtil"));
+const multicast_dns_1 = __importDefault(require("multicast-dns"));
 class MDNSTransport extends events_1.EventEmitter {
     constructor(options = {}) {
         super();
         this.destroyed = false;
         this.options = options;
-        this.mdns = multicastdns();
+        this.mdns = multicast_dns_1.default();
         this.mdns.setMaxListeners(0);
         this.mdns.on("query", async (packet, referrerObj) => {
             const query = new Query_1.default(packet);

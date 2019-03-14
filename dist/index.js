@@ -1,4 +1,14 @@
 "use strict";
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var Server_1 = require("./Server");
 exports.Server = Server_1.default;
@@ -18,11 +28,11 @@ var Listener_1 = require("./Listener");
 exports.Listener = Listener_1.default;
 var SpreadTheWord_1 = require("./SpreadTheWord");
 exports.SpreadTheWord = SpreadTheWord_1.default;
-const records = require("./records");
+const records = __importStar(require("./records"));
 exports.records = records;
-const transports = require("./transports");
+const transports = __importStar(require("./transports"));
 exports.transports = transports;
-const MDNSUtil = require("./MDNSUtil");
+const MDNSUtil = __importStar(require("./MDNSUtil"));
 exports.MDNSUtil = MDNSUtil;
-const SpreadTheWord_2 = require("./SpreadTheWord");
+const SpreadTheWord_2 = __importDefault(require("./SpreadTheWord"));
 exports.default = new SpreadTheWord_2.default();

@@ -1,12 +1,15 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const debug = require("debug");
-const Response_1 = require("./Response");
+const debug_1 = __importDefault(require("debug"));
+const Response_1 = __importDefault(require("./Response"));
 const events_1 = require("events");
 const Constants_1 = require("./Constants");
-const RecordRegistry_1 = require("./RecordRegistry");
-const MDNSTransport_1 = require("./transports/MDNSTransport");
-const debugLog = debug("SpreadTheWord:Server");
+const RecordRegistry_1 = __importDefault(require("./RecordRegistry"));
+const MDNSTransport_1 = __importDefault(require("./transports/MDNSTransport"));
+const debugLog = debug_1.default("SpreadTheWord:Server");
 class Server extends events_1.EventEmitter {
     constructor(options = {}) {
         super();

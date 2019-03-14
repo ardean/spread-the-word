@@ -1,5 +1,1 @@
-node_modules
-docs
-src
-test
-demo
+.npmrc

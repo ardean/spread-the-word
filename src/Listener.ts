@@ -1,6 +1,6 @@
+import debug from "debug";
 import Query from "./Query";
 import Server from "./Server";
-import * as debug from "debug";
 import SRV from "./records/SRV";
 import TXT from "./records/TXT";
 import Response from "./Response";

@@ -74,13 +74,9 @@
 				<a href="LICENSE.md"><img src="https://img.shields.io/npm/l/spread-the-word.svg" alt="License"></a></p>
 				<p><em>Spread services across your local network and discover other services</em></p>
 				<h2 id="installation">Installation</h2>
-				<pre><code class="lang-sh">$ npm i spread-the-word
-</code></pre>
-				<p>or</p>
-				<pre><code class="lang-sh">$ yarn add spread-the-word
-</code></pre>
+				<pre><code class="language-sh">$ npm i spread-the-word</code></pre>
 				<h2 id="usage">Usage</h2>
-				<pre><code class="lang-js"><span class="hljs-keyword">import</span> stw <span class="hljs-keyword">from</span> <span class="hljs-string">"spread-the-word"</span>;
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> stw <span class="hljs-keyword">from</span> <span class="hljs-string">"spread-the-word"</span>;
 
 stw
   .on(<span class="hljs-string">"up"</span>, (remoteService, res, referrer) =&gt; {
@@ -99,8 +95,7 @@ stw.spread({
   <span class="hljs-attr">txt</span>: {
     <span class="hljs-attr">message</span>: <span class="hljs-string">"Custom Data"</span>
   }
-});
-</code></pre>
+});</code></pre>
 				<h2 id="features">Features</h2>
 				<ul>
 					<li>easy service detection &amp; advertisement on your local network</li>
@@ -116,8 +111,7 @@ stw.spread({
 				<h2 id="documentation">Documentation</h2>
 				<p>You can find the latest version of documentation hosted <a href="https://ardean.github.io/spread-the-word/index.html">here</a>.</p>
 				<h2 id="debug">Debug</h2>
-				<pre><code class="lang-sh">$ DEBUG=SpreadTheWord:* yarn start
-</code></pre>
+				<pre><code class="language-sh">$ DEBUG=SpreadTheWord:* npm start</code></pre>
 				<h2 id="license">License</h2>
 				<p><a href="LICENSE.md">MIT</a></p>
 			</div>
