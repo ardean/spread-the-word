@@ -52,11 +52,13 @@ jobs:
       - run:
           name: Deploy docs to github
           command: |
-            git config user.email "$GITHUB_EMAIL"
-            git config user.name "$GITHUB_USERNAME"
-            git add ./docs/*
-            git commit -m "Publish docs v$VERSION"
-            git push -q https://${GITHUB_TOKEN}@github.com/ardean/spread-the-word.git master
+            if [ -z "$(npm info $(npm ls --depth=-1 2>/dev/null | head -1 | cut -f 1 -d " ") 2>/dev/null)" ] ; then
+              git config user.email "$GITHUB_EMAIL"
+              git config user.name "$GITHUB_USERNAME"
+              git add ./docs/*
+              git commit -m "Publish docs v$VERSION"
+              git push -q https://${GITHUB_TOKEN}@github.com/ardean/spread-the-word.git master
+            fi
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ./.npmrc
