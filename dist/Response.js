@@ -21,7 +21,7 @@ class Response {
         const additionals = (options.additionals || [])
             .map(x => MDNSUtil.parseRecord(x, parseOptions))
             .filter(x => x);
-        return new Response(Object.assign({}, options, { answers,
+        return new Response(Object.assign(Object.assign({}, options), { answers,
             additionals }));
     }
     static serialize(options, serializeOptions) {
@@ -31,7 +31,7 @@ class Response {
         const additionals = (options.additionals || [])
             .map(x => MDNSUtil.serializeRecord(x, serializeOptions))
             .filter(x => x);
-        return new Response(Object.assign({}, options, { answers,
+        return new Response(Object.assign(Object.assign({}, options), { answers,
             additionals }));
     }
 }

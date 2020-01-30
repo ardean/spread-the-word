@@ -18,13 +18,13 @@ class TXT extends Record_1.default {
         debugLog("parse", record.data, options);
         const data = MDNSUtil_1.parseTXTData(record.data, options);
         debugLog("parse output", data, options);
-        return new TXT(Object.assign({}, record, { data }));
+        return new TXT(Object.assign(Object.assign({}, record), { data }));
     }
     static serialize(record, options = {}) {
         debugLog("serialize", record.data, options);
         const data = MDNSUtil_1.serializeTXTData(record.data, options);
         debugLog("serialize output", data, options);
-        return new TXT(Object.assign({}, record, { data }));
+        return new TXT(Object.assign(Object.assign({}, record), { data }));
     }
 }
 exports.default = TXT;

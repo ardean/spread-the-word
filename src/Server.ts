@@ -5,7 +5,6 @@ import Referrer from "./Referrer";
 import Response from "./Response";
 import { EventEmitter } from "events";
 import { WILDCARD } from "./Constants";
-import { ServerOptions } from "./Server";
 import RecordRegistry from "./RecordRegistry";
 import MDNSTransport from "./transports/MDNSTransport";
 import Transport, { TransportOptions } from "./transports/Transport";

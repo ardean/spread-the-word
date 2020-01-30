@@ -1,6 +1,6 @@
 {
   "name": "spread-the-word",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "A Bonjour / Zeroconf implementation in TypeScript",
   "repository": "https://github.com/ardean/spread-the-word",
   "bugs": "https://github.com/ardean/spread-the-word/issues",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@types/debug": "^0.0.31",
-    "@types/node": "^9.4.1",
+    "@types/node": "^9.6.55",
     "debug": "^3.1.0",
     "dns-txt": "^2.0.2",
     "multicast-dns": "^6.2.3"
@@ -45,7 +45,7 @@
     "nodemon": "^1.18.9",
     "ts-node": "^7.0.1",
     "tslint": "^5.9.1",
-    "typedoc": "^0.15.0",
-    "typescript": "^3.2.2"
+    "typedoc": "^0.16.9",
+    "typescript": "^3.7.5"
   }
 }

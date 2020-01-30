@@ -4,7 +4,6 @@ import Service from "./Service";
 import Referrer from "./Referrer";
 import Response from "./Response";
 import { EventEmitter } from "events";
-import { ServerOptions } from "./Server";
 import RecordRegistry from "./RecordRegistry";
 import Transport, { TransportOptions } from "./transports/Transport";
 export interface ServerOptions {
