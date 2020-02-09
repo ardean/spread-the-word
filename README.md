@@ -24,9 +24,7 @@ stw.on("up", (remoteService, response, referrer) => {
   if (remoteService.txt) {
     console.log("TXT found:", remoteService.txt);
   }
-});
-
-stw.on("down", (remoteService, response, referrer) => {
+}).on("down", (remoteService, response, referrer) => {
   console.log(`${remoteService.name} (type: ${remoteService.type}, port: ${remoteService.port}) is down (from ${referrer.address})`);
 });
 
