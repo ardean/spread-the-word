@@ -21,7 +21,12 @@ export interface ListenerOptions {
   subtypes?: string[];
 }
 
-export default class Listener extends EventEmitter {
+interface Listener {
+  on(event: 'up', callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
+  on(event: 'down', callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
+}
+
+class Listener extends EventEmitter {
   server: Server;
   remoteServices: RemoteService[] = [];
   typeName: string;
@@ -139,3 +144,5 @@ export default class Listener extends EventEmitter {
     await this.server.transport.query(query);
   }
 }
+
+export default Listener;
