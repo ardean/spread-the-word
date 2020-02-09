@@ -21,6 +21,10 @@ export interface ServerOptions {
 interface Server {
   on(event: 'response', callback: (response: Response, referrer: Referrer) => void): this;
   on(event: 'query', callback: (query: Query, referrer: Referrer) => void): this;
+  on(event: 'destroy', callback: () => void): this;
+  once(event: 'response', callback: (response: Response, referrer: Referrer) => void): this;
+  once(event: 'query', callback: (query: Query, referrer: Referrer) => void): this;
+  once(event: 'destroy', callback: () => void): this;
 }
 
 class Server extends EventEmitter {

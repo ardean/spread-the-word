@@ -24,6 +24,10 @@ export interface ListenerOptions {
 interface Listener {
   on(event: 'up', callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
   on(event: 'down', callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
+  on(event: 'destroy', callback: () => void): this;
+  once(event: 'up', callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
+  once(event: 'down', callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
+  once(event: 'destroy', callback: () => void): this;
 }
 
 class Listener extends EventEmitter {
