@@ -19,13 +19,16 @@ $ npm i spread-the-word
 ```js
 import stw from "spread-the-word";
 
-stw
-  .on("up", (remoteService, res, referrer) => {
-    console.log(`${remoteService.name} is up! (from ${referrer.address})`);
-  })
-  .on("down", (remoteService, res, referrer) => {
-    console.log(`${remoteService.name} is down! (from ${referrer.address})`);
-  });
+stw.on("up", (remoteService, response, referrer) => {
+  console.log(`${remoteService.name} (type: ${remoteService.type}, port: ${remoteService.port}) is up (from ${referrer.address})`);
+  if (remoteService.txt) {
+    console.log("TXT found:", remoteService.txt);
+  }
+});
+
+stw.on("down", (remoteService, response, referrer) => {
+  console.log(`${remoteService.name} (type: ${remoteService.type}, port: ${remoteService.port}) is down (from ${referrer.address})`);
+});
 
 stw.listen({ type: "jsremote" });
 
