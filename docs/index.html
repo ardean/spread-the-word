@@ -85,13 +85,14 @@
 				</a>
 				<pre><code class="language-js"><span class="hljs-keyword">import</span> stw <span class="hljs-keyword">from</span> <span class="hljs-string">"spread-the-word"</span>;
 
-stw
-  .on(<span class="hljs-string">"up"</span>, (remoteService, res, referrer) =&gt; {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${remoteService.name}</span> is up! (from <span class="hljs-subst">${referrer.address}</span>)`</span>);
-  })
-  .on(<span class="hljs-string">"down"</span>, (remoteService, res, referrer) =&gt; {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${remoteService.name}</span> is down! (from <span class="hljs-subst">${referrer.address}</span>)`</span>);
-  });
+stw.on(<span class="hljs-string">"up"</span>, (remoteService, response, referrer) =&gt; {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${remoteService.name}</span> (type: <span class="hljs-subst">${remoteService.type}</span>, port: <span class="hljs-subst">${remoteService.port}</span>) is up (from <span class="hljs-subst">${referrer.address}</span>)`</span>);
+  <span class="hljs-keyword">if</span> (remoteService.txt) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"TXT found:"</span>, remoteService.txt);
+  }
+}).on(<span class="hljs-string">"down"</span>, (remoteService, response, referrer) =&gt; {
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`<span class="hljs-subst">${remoteService.name}</span> (type: <span class="hljs-subst">${remoteService.type}</span>, port: <span class="hljs-subst">${remoteService.port}</span>) is down (from <span class="hljs-subst">${referrer.address}</span>)`</span>);
+});
 
 stw.listen({ <span class="hljs-attr">type</span>: <span class="hljs-string">"jsremote"</span> });
 

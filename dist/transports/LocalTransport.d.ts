@@ -11,7 +11,19 @@ export interface LocalTransportOptions extends TransportOptions {
         address: string;
     }>;
 }
-export default class LocalTransport extends EventEmitter implements Transport {
+interface LocalTransport {
+    on(event: 'query', callback: (query: Query, referrer: Referrer) => void): this;
+    on(event: 'response', callback: (response: any, referrer: Referrer) => void): this;
+    on(event: 'localQuery', callback: (packet: any, referrerObj: any) => void): this;
+    on(event: 'localResponse', callback: (packet: any, referrerObj: any) => void): this;
+    on(event: 'destroy', callback: () => void): this;
+    once(event: 'query', callback: (query: Query, referrer: Referrer) => void): this;
+    once(event: 'response', callback: (response: any, referrer: Referrer) => void): this;
+    once(event: 'localQuery', callback: (packet: any, referrerObj: any) => void): this;
+    once(event: 'localResponse', callback: (packet: any, referrerObj: any) => void): this;
+    once(event: 'destroy', callback: () => void): this;
+}
+declare class LocalTransport extends EventEmitter implements Transport {
     options: LocalTransportOptions;
     addresses: Array<{
         family: string;
@@ -28,3 +40,4 @@ export default class LocalTransport extends EventEmitter implements Transport {
         address: string;
     }>;
 }
+export default LocalTransport;

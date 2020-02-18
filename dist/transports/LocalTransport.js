@@ -46,7 +46,7 @@ class LocalTransport extends events_1.EventEmitter {
         return this.addresses;
     }
 }
-exports.default = LocalTransport;
 function toPlainObject(instance) {
     return JSON.parse(JSON.stringify(instance));
 }
+exports.default = LocalTransport;

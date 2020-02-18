@@ -13,7 +13,15 @@ export interface ListenerOptions {
     protocol?: string;
     subtypes?: string[];
 }
-export default class Listener extends EventEmitter {
+interface Listener {
+    on(event: "up", callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
+    on(event: "down", callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
+    on(event: "destroy", callback: () => void): this;
+    once(event: "up", callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
+    once(event: "down", callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
+    once(event: "destroy", callback: () => void): this;
+}
+declare class Listener extends EventEmitter {
     server: Server;
     remoteServices: RemoteService[];
     typeName: string;
@@ -29,3 +37,4 @@ export default class Listener extends EventEmitter {
     removeRemoteService(name: string, res: Response, referrer: Referrer): void;
     queryUnresolvedRecords(): Promise<void>;
 }
+export default Listener;
