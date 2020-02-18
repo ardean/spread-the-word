@@ -10,16 +10,16 @@ export interface LocalTransportOptions extends TransportOptions {
 }
 
 interface LocalTransport {
-  on(event: 'query', callback: (query: Query, referrer: Referrer) => void): this;
-  on(event: 'response', callback: (response, referrer: Referrer) => void): this;
-  on(event: 'localQuery', callback: (packet, referrerObj: any) => void): this;
-  on(event: 'localResponse', callback: (packet, referrerObj: any) => void): this;
-  on(event: 'destroy', callback: () => void): this;
-  once(event: 'query', callback: (query: Query, referrer: Referrer) => void): this;
-  once(event: 'response', callback: (response, referrer: Referrer) => void): this;
-  once(event: 'localQuery', callback: (packet, referrerObj: any) => void): this;
-  once(event: 'localResponse', callback: (packet, referrerObj: any) => void): this;
-  once(event: 'destroy', callback: () => void): this;
+  on(event: "query", callback: (query: Query, referrer: Referrer) => void): this;
+  on(event: "response", callback: (response, referrer: Referrer) => void): this;
+  on(event: "localQuery", callback: (packet, referrerObj: any) => void): this;
+  on(event: "localResponse", callback: (packet, referrerObj: any) => void): this;
+  on(event: "destroy", callback: () => void): this;
+  once(event: "query", callback: (query: Query, referrer: Referrer) => void): this;
+  once(event: "response", callback: (response, referrer: Referrer) => void): this;
+  once(event: "localQuery", callback: (packet, referrerObj: any) => void): this;
+  once(event: "localResponse", callback: (packet, referrerObj: any) => void): this;
+  once(event: "destroy", callback: () => void): this;
 }
 
 class LocalTransport extends EventEmitter implements Transport {

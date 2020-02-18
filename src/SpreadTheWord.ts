@@ -9,12 +9,12 @@ import Listener, { ListenerOptions } from "./Listener";
 export type StatusType = "uninitialized" | "spreaded" | "destroyed";
 
 interface SpreadTheWord {
-  on(event: 'up', callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
-  on(event: 'down', callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
-  on(event: 'destroy', callback: () => void): this;
-  once(event: 'up', callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
-  once(event: 'down', callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
-  once(event: 'destroy', callback: () => void): this;
+  on(event: "up", callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
+  on(event: "down", callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
+  on(event: "destroy", callback: () => void): this;
+  once(event: "up", callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
+  once(event: "down", callback: (remoteService: RemoteService, response: Response, referrer: Referrer) => void): this;
+  once(event: "destroy", callback: () => void): this;
 }
 
 class SpreadTheWord extends EventEmitter {

@@ -19,6 +19,7 @@
     "max-classes-per-file": false,
     "no-console": {
       "severity": "warning"
-    }
+    },
+    "unified-signatures": false
   }
 }

@@ -22,8 +22,8 @@ export interface ServiceOptions {
 }
 
 interface Service {
-  on(event: 'destroy', callback: () => void): this;
-  once(event: 'destroy', callback: () => void): this;
+  on(event: "destroy", callback: () => void): this;
+  once(event: "destroy", callback: () => void): this;
 }
 
 class Service extends EventEmitter {
