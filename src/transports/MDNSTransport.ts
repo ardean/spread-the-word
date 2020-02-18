@@ -6,7 +6,14 @@ import * as MDNSUtil from "../MDNSUtil";
 import multicastdns from "multicast-dns";
 import Transport, { TransportOptions } from "./Transport";
 
-export default class MDNSTransport extends EventEmitter implements Transport {
+interface MDNSTransport {
+  on(event: 'query', callback: (query: Query, referrer: Referrer) => void): this;
+  on(event: 'response', callback: (response, referrer: Referrer) => void): this;
+  once(event: 'query', callback: (query: Query, referrer: Referrer) => void): this;
+  once(event: 'response', callback: (response, referrer: Referrer) => void): this;
+}
+
+class MDNSTransport extends EventEmitter implements Transport {
   options: TransportOptions;
   destroyed: boolean = false;
   mdns: any;
@@ -66,3 +73,5 @@ export default class MDNSTransport extends EventEmitter implements Transport {
     return MDNSUtil.getExternalAddresses();
   }
 }
+
+export default MDNSTransport;

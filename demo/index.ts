@@ -1,6 +1,6 @@
 // tslint:disable:no-console
 
-import stw, { RemoteService, Response, Referrer } from "../src";
+import stw from "../src";
 
 stw.init({
   transportOptions: {
@@ -8,14 +8,14 @@ stw.init({
   }
 });
 
-stw
-  .on("up", (remoteService: RemoteService, res: Response, referrer: Referrer) => {
-    console.log(`${remoteService.name} (type: ${remoteService.type}, port: ${remoteService.port}) is up (from ${referrer.address})`);
-    if (remoteService.txt) console.log("TXT found:", remoteService.txt);
-  })
-  .on("down", (remoteService: RemoteService, res: Response, referrer: Referrer) => {
-    console.log(`${remoteService.name} (type: ${remoteService.type}, port: ${remoteService.port}) is down (from ${referrer.address})`);
-  });
+stw.on("up", (remoteService, response, referrer) => {
+  console.log(`${remoteService.name} (type: ${remoteService.type}, port: ${remoteService.port}) is up (from ${referrer.address})`);
+  if (remoteService.txt) {
+    console.log("TXT found:", remoteService.txt);
+  }
+}).on("down", (remoteService, response, referrer) => {
+  console.log(`${remoteService.name} (type: ${remoteService.type}, port: ${remoteService.port}) is down (from ${referrer.address})`);
+});
 
 stw.listen();
 

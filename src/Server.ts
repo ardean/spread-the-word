@@ -18,7 +18,16 @@ export interface ServerOptions {
   socketOptions?: any;
 }
 
-export default class Server extends EventEmitter {
+interface Server {
+  on(event: 'response', callback: (response: Response, referrer: Referrer) => void): this;
+  on(event: 'query', callback: (query: Query, referrer: Referrer) => void): this;
+  on(event: 'destroy', callback: () => void): this;
+  once(event: 'response', callback: (response: Response, referrer: Referrer) => void): this;
+  once(event: 'query', callback: (query: Query, referrer: Referrer) => void): this;
+  once(event: 'destroy', callback: () => void): this;
+}
+
+class Server extends EventEmitter {
   transportOptions: TransportOptions;
   services: Service[] = [];
   transport: Transport;
@@ -165,3 +174,5 @@ export default class Server extends EventEmitter {
     if (index > -1) this.services.splice(index, 1);
   }
 }
+
+export default Server;

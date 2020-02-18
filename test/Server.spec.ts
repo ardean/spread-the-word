@@ -19,7 +19,7 @@ const dnsType = MDNSUtil.serializeDNSName({ type, protocol: "tcp", domain: TOP_L
 const dnsName = MDNSUtil.serializeDNSName({ name, type, protocol: "tcp", domain: TOP_LEVEL_DOMAIN });
 
 describe("Server", () => {
-  describe(`server.on("respond", fn)`, () => {
+  describe(`server.on("response", fn)`, () => {
     let transport: Transport;
     let server: Server;
 

@@ -21,7 +21,12 @@ export interface ServiceOptions {
   hostname?: string;
 }
 
-export default class Service extends EventEmitter {
+interface Service {
+  on(event: 'destroy', callback: () => void): this;
+  once(event: 'destroy', callback: () => void): this;
+}
+
+class Service extends EventEmitter {
   type: string;
   name: string;
   server: Server;
@@ -172,3 +177,5 @@ export default class Service extends EventEmitter {
     this.emit("destroy");
   }
 }
+
+export default Service;

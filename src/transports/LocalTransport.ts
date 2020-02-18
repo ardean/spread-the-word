@@ -9,7 +9,20 @@ export interface LocalTransportOptions extends TransportOptions {
   addresses: Array<{ family: string, address: string }>;
 }
 
-export default class LocalTransport extends EventEmitter implements Transport {
+interface LocalTransport {
+  on(event: 'query', callback: (query: Query, referrer: Referrer) => void): this;
+  on(event: 'response', callback: (response, referrer: Referrer) => void): this;
+  on(event: 'localQuery', callback: (packet, referrerObj: any) => void): this;
+  on(event: 'localResponse', callback: (packet, referrerObj: any) => void): this;
+  on(event: 'destroy', callback: () => void): this;
+  once(event: 'query', callback: (query: Query, referrer: Referrer) => void): this;
+  once(event: 'response', callback: (response, referrer: Referrer) => void): this;
+  once(event: 'localQuery', callback: (packet, referrerObj: any) => void): this;
+  once(event: 'localResponse', callback: (packet, referrerObj: any) => void): this;
+  once(event: 'destroy', callback: () => void): this;
+}
+
+class LocalTransport extends EventEmitter implements Transport {
   options: LocalTransportOptions;
   addresses: Array<{ family: string, address: string }> = [];
   destroyed: boolean = false;
@@ -68,3 +81,5 @@ export default class LocalTransport extends EventEmitter implements Transport {
 function toPlainObject(instance) {
   return JSON.parse(JSON.stringify(instance));
 }
+
+export default LocalTransport;
