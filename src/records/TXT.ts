@@ -2,7 +2,7 @@ import debug from "debug";
 import Record from "./Record";
 import { parseTXTData, serializeTXTData, TXTData } from "../MDNSUtil";
 
-type DataType = TXTData | Buffer | string;
+export type DataType = TXTData | Buffer | string;
 
 const debugLog = debug("SpreadTheWord:TXT");
 
