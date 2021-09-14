@@ -34,7 +34,7 @@ describe("Service", () => {
     });
 
     it("sends goodbye on hide", async () => {
-      const goodbyeDetector = new Promise(resolve => {
+      const goodbyeDetector = new Promise<void>(resolve => {
         server.on("response", function onResponse(res: Response) {
           let goodbyeFound = false;
           for (const record of res.answers) {
@@ -61,7 +61,7 @@ describe("Service", () => {
       let serviceFound = false;
       let txtFound = false;
 
-      const responseDetector = new Promise(resolve => {
+      const responseDetector = new Promise<void>(resolve => {
         server.on("response", function onResponse(res: Response) {
           for (const record of res.answers) {
             if (record.type === "PTR" && record.name === WILDCARD && record.data === dnsType) wildcardFound = true;

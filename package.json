@@ -1,6 +1,6 @@
 {
   "name": "spread-the-word",
-  "version": "0.8.4",
+  "version": "0.9.0",
   "description": "A Bonjour / Zeroconf implementation in TypeScript",
   "repository": "https://github.com/ardean/spread-the-word",
   "bugs": "https://github.com/ardean/spread-the-word/issues",
@@ -27,25 +27,23 @@
     "build": "rm -rf dist && npm run build-src && npm run build-docs",
     "build-src": "tsc",
     "build-docs": "typedoc --out ./docs ./src --hideGenerator --excludePrivate --mode file && touch ./docs/.nojekyll",
-    "test": "mocha -r ts-node/register test/*.spec.ts --exit",
-    "lint": "tslint --project ."
+    "test": "mocha -r ts-node/register test/*.spec.ts --exit"
   },
   "dependencies": {
-    "@types/debug": "^0.0.31",
-    "@types/node": "^9.6.55",
-    "debug": "^3.1.0",
+    "@types/debug": "^4.1.7",
+    "@types/node": "^16.9.1",
+    "debug": "^4.3.2",
     "dns-txt": "^2.0.2",
-    "multicast-dns": "^6.2.3"
+    "multicast-dns": "^7.2.3"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.2",
-    "@types/mocha": "^2.2.48",
-    "chai": "^4.1.2",
-    "mocha": "^5.0.0",
-    "nodemon": "^1.18.9",
-    "ts-node": "^7.0.1",
-    "tslint": "^5.9.1",
+    "@types/chai": "^4.2.21",
+    "@types/mocha": "^9.0.0",
+    "chai": "^4.3.4",
+    "mocha": "^9.1.1",
+    "nodemon": "^2.0.12",
+    "ts-node": "^10.2.1",
     "typedoc": "^0.16.9",
-    "typescript": "^3.7.5"
+    "typescript": "^4.4.3"
   }
 }

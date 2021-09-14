@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.serializeTXTData = exports.parseTXTData = exports.serializeRecord = exports.parseRecord = exports.getExternalAddresses = exports.sameRecord = exports.parseDNSName = exports.serializeDNSName = void 0;
 const os_1 = __importDefault(require("os"));
 const A_1 = __importDefault(require("./records/A"));
 const dns_txt_1 = __importDefault(require("dns-txt"));
@@ -114,11 +115,11 @@ function serializeRecord(record, options = {}) {
 }
 exports.serializeRecord = serializeRecord;
 function parseTXTData(data, options = { binary: false }) {
-    const result = dns_txt_1.default({ binary: options.binary }).decode(data);
+    const result = (0, dns_txt_1.default)({ binary: options.binary }).decode(data);
     return Object.keys(result).length > 0 ? result : null;
 }
 exports.parseTXTData = parseTXTData;
 function serializeTXTData(data, options = { binary: false }) {
-    return dns_txt_1.default({ binary: options.binary }).encode(data);
+    return (0, dns_txt_1.default)({ binary: options.binary }).encode(data);
 }
 exports.serializeTXTData = serializeTXTData;

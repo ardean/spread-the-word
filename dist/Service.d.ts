@@ -14,8 +14,8 @@ export interface ServiceOptions {
     hostname?: string;
 }
 interface Service {
-    on(event: 'destroy', callback: () => void): this;
-    once(event: 'destroy', callback: () => void): this;
+    on(event: "destroy", callback: () => void): this;
+    once(event: "destroy", callback: () => void): this;
 }
 declare class Service extends EventEmitter {
     type: string;

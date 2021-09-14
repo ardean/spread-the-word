@@ -32,7 +32,7 @@ describe("Listener", () => {
     });
 
     it("emits up event for matching service type", async () => {
-      const upDetector = new Promise(resolve => {
+      const upDetector = new Promise<void>(resolve => {
         listener.on("up", function onUp(remoteService) {
           if (remoteService.name === name) {
             listener.removeListener("up", onUp);
@@ -46,7 +46,7 @@ describe("Listener", () => {
     });
 
     it("emits down event for matching service type", async () => {
-      const downDetector = new Promise(resolve => {
+      const downDetector = new Promise<void>(resolve => {
         listener.on("down", function onDown(remoteService) {
           if (remoteService.name === name) {
             listener.removeListener("down", onDown);
@@ -61,7 +61,7 @@ describe("Listener", () => {
     });
 
     it("removes SRV record", async () => {
-      const upDetector = new Promise(resolve => {
+      const upDetector = new Promise<void>(resolve => {
         listener.on("up", function onUp(remoteService) {
           if (remoteService.name !== name) return;
           listener.removeListener("up", onUp);
@@ -69,7 +69,7 @@ describe("Listener", () => {
         });
       });
 
-      const downDetector = new Promise(resolve => {
+      const downDetector = new Promise<void>(resolve => {
         listener.on("down", function onDown(remoteService) {
           if (remoteService.name !== name) return;
           listener.removeListener("down", onDown);

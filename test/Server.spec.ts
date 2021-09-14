@@ -46,7 +46,7 @@ describe("Server", () => {
 
       transport.respond(new Response({ answers: [new PTR({ name: dnsType, data: dnsName })] }));
 
-      await new Promise(resolve => setTimeout(() => resolve(), 1000));
+      await new Promise<void>(resolve => setTimeout(() => resolve(), 1000));
 
       server.removeListener("response", onResponse);
 
@@ -81,7 +81,7 @@ describe("Server", () => {
 
       transport.query(new Query({ questions: [{ name: "own", type: "ANY" }] }));
 
-      await new Promise(resolve => setTimeout(() => resolve(), 500));
+      await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
 
       server.removeListener("query", onQuery);
 
@@ -127,7 +127,7 @@ describe("Server", () => {
         new Referrer({ address: otherAddress })
       );
 
-      await new Promise(resolve => setTimeout(() => resolve(), 500));
+      await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
 
       server.removeListener("response", onResponse);
 
@@ -151,7 +151,7 @@ describe("Server", () => {
         new Referrer({ address: otherAddress })
       );
 
-      await new Promise(resolve => setTimeout(() => resolve(), 500));
+      await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
 
       server.removeListener("response", onResponse);
 

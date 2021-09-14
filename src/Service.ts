@@ -142,7 +142,7 @@ class Service extends EventEmitter {
   async hide() {
     clearTimeout(this.broadcastDelay);
     await this.sendGoodbye();
-    await new Promise(resolve => setTimeout(() => resolve(), 100));
+    await new Promise<void>(resolve => setTimeout(() => resolve(), 100));
 
     this.spreaded = false;
   }

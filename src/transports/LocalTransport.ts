@@ -51,7 +51,7 @@ class LocalTransport extends EventEmitter implements Transport {
   }
 
   async query(query: Query) {
-    await new Promise(resolve => setTimeout(() => resolve(), 50));
+    await new Promise<void>(resolve => setTimeout(() => resolve(), 50));
 
     this.emit("localQuery", toPlainObject(query), toPlainObject(this.referrer));
   }
@@ -59,7 +59,7 @@ class LocalTransport extends EventEmitter implements Transport {
   async respond(res: Response) {
     res = Response.serialize(res, { binaryTXT: this.options.binaryTXT });
 
-    await new Promise(resolve => setTimeout(() => resolve(), 50));
+    await new Promise<void>(resolve => setTimeout(() => resolve(), 50));
 
     this.emit("localResponse", toPlainObject(res), toPlainObject(this.referrer));
   }
@@ -68,7 +68,7 @@ class LocalTransport extends EventEmitter implements Transport {
     if (this.destroyed) return;
     this.destroyed = true;
 
-    await new Promise(resolve => setTimeout(() => resolve(), 50));
+    await new Promise<void>(resolve => setTimeout(() => resolve(), 50));
 
     this.emit("destroy");
   }

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LocalTransportOptions | spread-the-word</title>
+	<title>Abortable | spread-the-word</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="localtransportoptions.html">LocalTransportOptions</a>
+					<a href="../classes/spreadtheword.html">SpreadTheWord</a>
+				</li>
+				<li>
+					<a href="spreadtheword.abortable.html">Abortable</a>
 				</li>
 			</ul>
-			<h1>Interface LocalTransportOptions</h1>
+			<h1>Interface Abortable</h1>
 		</div>
 	</div>
 </header>
@@ -70,12 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="transportoptions.html" class="tsd-signature-type">TransportOptions</a>
-						<ul class="tsd-hierarchy">
-							<li>
-								<span class="target">LocalTransportOptions</span>
-							</li>
-						</ul>
+						<span class="target">Abortable</span>
 					</li>
 				</ul>
 			</section>
@@ -86,9 +84,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="localtransportoptions.html#addresses" class="tsd-kind-icon">addresses</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="localtransportoptions.html#binarytxt" class="tsd-kind-icon">binaryTXT</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="localtransportoptions.html#referreroptions" class="tsd-kind-icon">referrer<wbr>Options</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="spreadtheword.abortable.html#signal" class="tsd-kind-icon">signal</a></li>
 							</ul>
 						</section>
 					</div>
@@ -97,35 +93,19 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="addresses" class="tsd-anchor"></a>
-					<h3>addresses</h3>
-					<div class="tsd-signature tsd-kind-icon">addresses<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>family<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="signal" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> signal</h3>
+					<div class="tsd-signature tsd-kind-icon">signal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AbortSignal</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/adf0acc/src/transports/LocalTransport.ts#L9">src/transports/LocalTransport.ts:9</a></li>
+							<li>Defined in node_modules/@types/node/events.d.ts:289</li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="binarytxt" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> binaryTXT</h3>
-					<div class="tsd-signature tsd-kind-icon">binaryTXT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="transportoptions.html">TransportOptions</a>.<a href="transportoptions.html#binarytxt">binaryTXT</a></p>
-						<ul>
-							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/adf0acc/src/transports/Transport.ts#L6">src/transports/Transport.ts:6</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="referreroptions" class="tsd-anchor"></a>
-					<h3>referrer<wbr>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">referrer<wbr>Options<span class="tsd-signature-symbol">:</span> <a href="referreroptions.html" class="tsd-signature-type">ReferrerOptions</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ardean/spread-the-word/blob/adf0acc/src/transports/LocalTransport.ts#L8">src/transports/LocalTransport.ts:8</a></li>
-						</ul>
-					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>When provided the corresponding <code>AbortController</code> can be used to cancel an asynchronous action.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -141,17 +121,112 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface">
-						<a href="localtransportoptions.html" class="tsd-kind-icon">Local<wbr>Transport<wbr>Options</a>
+					<li class="current tsd-kind-class">
+						<a href="../classes/spreadtheword.html" class="tsd-kind-icon">Spread<wbr>The<wbr>Word</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="localtransportoptions.html#addresses" class="tsd-kind-icon">addresses</a>
+							<li class="current tsd-kind-interface tsd-parent-kind-class">
+								<a href="spreadtheword.abortable.html" class="tsd-kind-icon">Abortable</a>
+								<ul>
+									<li class=" tsd-kind-property tsd-parent-kind-interface">
+										<a href="spreadtheword.abortable.html#signal" class="tsd-kind-icon">signal</a>
+									</li>
+								</ul>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="localtransportoptions.html#binarytxt" class="tsd-kind-icon">binaryTXT</a>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+								<a href="../classes/spreadtheword.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="localtransportoptions.html#referreroptions" class="tsd-kind-icon">referrer<wbr>Options</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="../classes/spreadtheword.html#listenerslist" class="tsd-kind-icon">listeners<wbr>List</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="../classes/spreadtheword.html#server" class="tsd-kind-icon">server</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="../classes/spreadtheword.html#serviceslist" class="tsd-kind-icon">services<wbr>List</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="../classes/spreadtheword.html#status" class="tsd-kind-icon">status</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+								<a href="../classes/spreadtheword.html#capturerejectionsymbol" class="tsd-kind-icon">capture<wbr>Rejection<wbr>Symbol</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+								<a href="../classes/spreadtheword.html#capturerejections" class="tsd-kind-icon">capture<wbr>Rejections</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+								<a href="../classes/spreadtheword.html#defaultmaxlisteners" class="tsd-kind-icon">default<wbr>Max<wbr>Listeners</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+								<a href="../classes/spreadtheword.html#errormonitor" class="tsd-kind-icon">error<wbr>Monitor</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="../classes/spreadtheword.html#addlistener" class="tsd-kind-icon">add<wbr>Listener</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="../classes/spreadtheword.html#destroy" class="tsd-kind-icon">destroy</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="../classes/spreadtheword.html#emit" class="tsd-kind-icon">emit</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="../classes/spreadtheword.html#eventnames" class="tsd-kind-icon">event<wbr>Names</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="../classes/spreadtheword.html#getmaxlisteners" class="tsd-kind-icon">get<wbr>Max<wbr>Listeners</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="../classes/spreadtheword.html#init" class="tsd-kind-icon">init</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="../classes/spreadtheword.html#listen" class="tsd-kind-icon">listen</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="../classes/spreadtheword.html#listenercount" class="tsd-kind-icon">listener<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="../classes/spreadtheword.html#listeners" class="tsd-kind-icon">listeners</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="../classes/spreadtheword.html#off" class="tsd-kind-icon">off</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="../classes/spreadtheword.html#on" class="tsd-kind-icon">on</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="../classes/spreadtheword.html#once" class="tsd-kind-icon">once</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="../classes/spreadtheword.html#prependlistener" class="tsd-kind-icon">prepend<wbr>Listener</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="../classes/spreadtheword.html#prependoncelistener" class="tsd-kind-icon">prepend<wbr>Once<wbr>Listener</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="../classes/spreadtheword.html#rawlisteners" class="tsd-kind-icon">raw<wbr>Listeners</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="../classes/spreadtheword.html#removealllisteners" class="tsd-kind-icon">remove<wbr>All<wbr>Listeners</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="../classes/spreadtheword.html#removelistener" class="tsd-kind-icon">remove<wbr>Listener</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="../classes/spreadtheword.html#setmaxlisteners" class="tsd-kind-icon">set<wbr>Max<wbr>Listeners</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="../classes/spreadtheword.html#spread" class="tsd-kind-icon">spread</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+								<a href="../classes/spreadtheword.html#geteventlisteners" class="tsd-kind-icon">get<wbr>Event<wbr>Listeners</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+								<a href="../classes/spreadtheword.html#listenercount-1" class="tsd-kind-icon">listener<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
+								<a href="../classes/spreadtheword.html#on-1" class="tsd-kind-icon">on</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited tsd-is-static">
+								<a href="../classes/spreadtheword.html#once-1" class="tsd-kind-icon">once</a>
 							</li>
 						</ul>
 					</li>

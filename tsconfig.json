@@ -4,8 +4,8 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "moduleResolution": "node",
-    "module": "commonjs",
-    "target": "es2017",
+    "module": "CommonJS",
+    "target": "ES2021",
     "esModuleInterop": true
   },
   "include": [

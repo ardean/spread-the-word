@@ -51,7 +51,7 @@ describe("RecordRegistry", () => {
     it("keeps house", async () => {
       recordRegistry.add(new PTR({ name: "dead", data: "dead", ttl: 0.05 }));
 
-      await new Promise(resolve => setTimeout(() => resolve(), 60));
+      await new Promise<void>(resolve => setTimeout(() => resolve(), 60));
 
       assert.lengthOf(recordRegistry.find(x => x.name === "dead"), 0);
     });

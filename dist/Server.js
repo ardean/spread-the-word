@@ -9,7 +9,7 @@ const events_1 = require("events");
 const Constants_1 = require("./Constants");
 const RecordRegistry_1 = __importDefault(require("./RecordRegistry"));
 const MDNSTransport_1 = __importDefault(require("./transports/MDNSTransport"));
-const debugLog = debug_1.default("SpreadTheWord:Server");
+const debugLog = (0, debug_1.default)("SpreadTheWord:Server");
 class Server extends events_1.EventEmitter {
     constructor(options = {}) {
         super();
