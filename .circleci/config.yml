@@ -18,9 +18,6 @@ jobs:
           name: Install Dependencies
           command: npm install
       - run:
-          name: Run linter
-          command: npm run lint
-      - run:
           name: Run build
           command: npm run build
       - save_cache:

@@ -1,6 +1,6 @@
 {
   "name": "spread-the-word",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "A Bonjour / Zeroconf implementation in TypeScript",
   "repository": "https://github.com/ardean/spread-the-word",
   "bugs": "https://github.com/ardean/spread-the-word/issues",

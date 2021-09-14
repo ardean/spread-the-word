@@ -1,5 +1,3 @@
-// tslint:disable:no-console
-
 import stw from "../src";
 
 stw.init({
